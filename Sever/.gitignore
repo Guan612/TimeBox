@@ -1,0 +1,3 @@
+# Ignore nodemols and package-lock files
+node_modules/
+package-lock.json
