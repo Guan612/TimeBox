@@ -47,7 +47,7 @@ url：/login
         "reslut": {
             "user_name": "admin",
             "user_id": 1,
-            "token":xxxxxxxxxx
+            "token":"xxxxxxxxxx"
         }
     }
 ```
