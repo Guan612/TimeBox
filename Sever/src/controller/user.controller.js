@@ -17,6 +17,8 @@ class userController {
     }
 
     async changePassword(ctx, next) {
+        const {user_name,old_password,new_password} = ctx.request.body
+        const res = await changePassword({user_name,old_password,new_password})
         ctx.body = 'changePassword'
     }
 }
