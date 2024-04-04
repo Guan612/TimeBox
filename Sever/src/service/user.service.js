@@ -11,8 +11,8 @@ class userService {
 
 
     //更改密码
-    async changePsd(userInfo){
-        const {user_name,password} = userInfo
+    async updatePsd(userInfo){
+        const {user_name,old_password,new_password} = userInfo;
         return userInfo
     }
 }
