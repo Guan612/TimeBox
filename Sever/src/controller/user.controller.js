@@ -15,6 +15,10 @@ class userController {
     async login(ctx, next) {
         ctx.body = 'login'
     }
+
+    async changePassword(ctx, next) {
+        ctx.body = 'changePassword'
+    }
 }
 
 module.exports = new userController()
