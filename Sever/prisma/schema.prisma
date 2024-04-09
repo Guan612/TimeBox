@@ -13,6 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//用户表
 model User {
   id        Int      @id @default(autoincrement())
   ncikname  String
@@ -23,12 +24,14 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
+//用户头像表
 model UserHaderImg {
   id              Int    @id @default(autoincrement())
   userId          Int
   userHaderImgUrl String
 }
 
+//照片合集信息表
 model PhotoInfo {
   id                Int    @id @default(autoincrement())
   userId            Int
@@ -38,6 +41,7 @@ model PhotoInfo {
   photoDes          String
 }
 
+//照片合集表
 model PhotoCollection {
   id                Int    @id @default(autoincrement())
   userId            Int
@@ -46,6 +50,7 @@ model PhotoCollection {
   photoShootTime    String
 }
 
+//照片管理表
 model PhotoCollectionMange {
   id                Int @id @default(autoincrement())
   userId            Int
