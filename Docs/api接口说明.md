@@ -123,33 +123,31 @@ url：/:photo_collection_id
     {
         "code": 0,
         "msg": "获取照片详细信息成功",
-        "reslut": 
-        [
-            "collectionInfo":{
-                "photo_id": 1,
-                "photo_collection_id":1,
+        "result": {
+            "collectionInfo": {
+                "photo_collection_id": 1,
+                "photo_name": "photo1",
                 "photo_desc": "photo1 desc",
-                "photo_shoot_time": "2020-01-01 00:00:00",
+                "photo_shoot_time": "2020-01-01 00:00:00"
             },
-            "photos":[
+            "photos": [
                 {
                     "photo_id": 1,
                     "user_id": 1,
-                    "photo_url": "http://xxxxxxx.jpg",
+                    "photo_url": "http://xxxxxxx.jpg"
                 },
                 {
                     "photo_id": 2,
                     "user_id": 1,
-                    "photo_url": "http://xxxxxxx.jpg",
+                    "photo_url": "http://xxxxxxx.jpg"
                 },
                 {
                     "photo_id": 3,
                     "user_id": 2,
-                    "photo_url": "http://xxxxxxx.jpg",
-                }    
+                    "photo_url": "http://xxxxxxx.jpg"
+                }
             ]
-
-        ]     
+        }     
     }
 ```
 
