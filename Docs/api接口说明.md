@@ -108,14 +108,14 @@ url：/
     }
 ```
 
-### 2.2 获取照片详细信息
+### 2.2 获取照片合集详细信息
 方法：GET
-url：/:photo_id
+url：/:photo_collection_id
 参数：  
 
 | 参数名 | 类型 | 是否必须 | 说明 |
 | :----: | :----: | :----: | :----: |    
-| photo_id | int | 是 | 照片id | 
+| photo_collection_id | int | 是 | 照片合集id | 
 
 返回示例    
 
@@ -123,17 +123,37 @@ url：/:photo_id
     {
         "code": 0,
         "msg": "获取照片详细信息成功",
-        "reslut": {
-            "photo_id": 1,
-            "photo_name": "photo1", 
-            "photo_url": "http://xxxxxxx.jpg",
-            "photo_desc": "photo1 desc",
-            "photo_shoot_time": "2020-01-01 00:00:00",
-        }
+        "reslut": 
+        [
+            "collectionInfo":{
+                "photo_id": 1,
+                "photo_collection_id":1,
+                "photo_desc": "photo1 desc",
+                "photo_shoot_time": "2020-01-01 00:00:00",
+            },
+            "photos":[
+                {
+                    "photo_id": 1,
+                    "user_id": 1,
+                    "photo_url": "http://xxxxxxx.jpg",
+                },
+                {
+                    "photo_id": 2,
+                    "user_id": 1,
+                    "photo_url": "http://xxxxxxx.jpg",
+                },
+                {
+                    "photo_id": 3,
+                    "user_id": 2,
+                    "photo_url": "http://xxxxxxx.jpg",
+                }    
+            ]
+
+        ]     
     }
 ```
 
-### 2.3 添加照片
+### 2.3 添加照片集
 方法：POST
 url：/
 参数：
@@ -144,7 +164,6 @@ url：/
 | photo_url | string | 是 | 照片url |
 | photo_desc | string | 否 | 照片描述 |
 | isdelete | boolean | 否 | 是否删除 |
-| photo_shoot_time | string | 否 | 照片拍摄时间 |
 
 返回示例    
 
@@ -156,7 +175,7 @@ url：/
     }
 ```
 
-### 2.4 修改照片
+### 2.4 修改照片合集信息
 方法：PUT
 url：/:photo_id
 参数：
@@ -181,7 +200,7 @@ url：/:photo_id
     }
 ```
 
-### 2.5 删除照片
+### 2.5 删除照片合集
 方法：DELETE
 url：/:photo_id
 参数：
