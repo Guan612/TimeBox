@@ -53,8 +53,8 @@ url：/login
 ```
 
 ### 1.3 修改密码
-方法：POST
-url：/change_password
+方法：PUT
+url：/changepwd
 参数：
 
 | 参数名 | 类型 | 是否必须 | 说明 |
