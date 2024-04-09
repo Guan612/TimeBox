@@ -14,9 +14,40 @@ datasource db {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  name      String
+  id        Int      @id @default(autoincrement())
+  ncikname  String
+  password  String
   email     String
+  phones    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model UserHaderImg {
+  id              Int    @id @default(autoincrement())
+  userId          Int
+  userHaderImgUrl String
+}
+
+model PhotoInfo {
+  id                Int    @id @default(autoincrement())
+  userId            Int
+  photoCollectionId Int
+  photoUrl          String
+  photoName         String
+  photoDes          String
+}
+
+model PhotoCollection {
+  id                Int    @id @default(autoincrement())
+  userId            Int
+  photoCollectionId Int
+  photoUrl          String
+  photoShootTime    String
+}
+
+model PhotoCollectionMange {
+  id                Int @id @default(autoincrement())
+  userId            Int
+  photoCollectionId Int
 }
