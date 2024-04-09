@@ -2,7 +2,7 @@ import axios from "axios"
 import {useUserStore} from '@/stores/userStore'
 
 const http =  axios.create({
-    baseURL: 'http://127.0.0.1:5000',
+    baseURL: 'http://127.0.0.1:8000',
     timeout: 2000
 })
 
