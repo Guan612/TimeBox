@@ -16,10 +16,18 @@ class userController {
         ctx.body = 'login'
     }
 
-    async changePassword(ctx, next) {
-        const {user_name,old_password,new_password} = ctx.request.body
+    //更改用户密码
+    async changePwd(ctx, next) {
+        const {userID,old_password,new_password} = ctx.request.body
         const res = await updatePwd({user_name,old_password,new_password})
         ctx.body = 'changePassword'
+    }
+
+    //更改用户昵称
+    async changeNickName(ctx, next) {
+        const {userID,nick_name} = ctx.request.body
+        const res = await updateNickName({user_name,nick_name})
+        ctx.body = 'changeNickName'
     }
 }
 
