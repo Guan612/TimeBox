@@ -1,5 +1,5 @@
-const {userFormateError,userInfoError} = require('../constant/erro.type')
-
+const {userFormateError,userInfoError,userAlreadyExited} = require('../constant/erro.type')
+const {findUser} = require('../service/user.service')
 //验证必填项目
 const userValidator = (rules) => {
     return async (ctx, next) => {
@@ -19,15 +19,21 @@ const userValidator = (rules) => {
     }
 }
 
-//注册用户是否存在验证
+//用户是否存在验证
 const userExistValidator = async (ctx, next) => {
-    
-
+    const {loginid} = ctx.request.body;
+    const res = await findUser(loginid)
+    //console.log(res)
+    if (res) {
+        return ctx.app.emit('error', userAlreadyExited, ctx)
+    }
 
     await next();
 }
 
+//密码加密
+
 module.exports = {
     userValidator,
-    userExistValidator
+    userExistValidator,
 }

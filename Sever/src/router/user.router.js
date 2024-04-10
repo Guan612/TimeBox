@@ -41,6 +41,6 @@ router.post('/test', userValidator({
     email:{type:"email",required:false},
     nickname:{type:"string",required:false},
     phone:{type:"string",required:false},
-}), test)
+}),userExistValidator, test)
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const prisma = require('../db/prisma')
 
 class userService {
-    //注册
+    //注册用户
     async create(userInfo){
         const res = await prisma.user.create({
             data:userInfo
@@ -10,9 +10,18 @@ class userService {
         return res
     }
 
-    //登录验证
-    async login(userInfo){
-        
+    //验证是否已经注册
+    async findUser(loginid){
+        const res = await prisma.user.findUnique({
+            select:{
+                id:true
+            },
+            where:{
+                loginid:loginid
+            }
+        })
+        //console.log(res)
+        return res
     }
 
     //更改密码
