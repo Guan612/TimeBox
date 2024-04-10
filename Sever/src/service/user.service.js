@@ -3,7 +3,7 @@ const prisma = require('../db/prisma')
 class userService {
     //注册
     async create(userInfo){
-        const res =  await prisma.user.create({
+        const res = await prisma.user.create({
             data:userInfo
         })
 
@@ -11,7 +11,9 @@ class userService {
     }
 
     //登录验证
-
+    async login(userInfo){
+        
+    }
 
     //更改密码
     async updatePsd(userInfo){
