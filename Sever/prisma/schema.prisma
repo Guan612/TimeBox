@@ -19,7 +19,7 @@ datasource db {
 model User {
   id              Int                   @id @default(autoincrement())
   loginid         String                @unique
-  ncikname        String?
+  nickname        String?
   password        String
   email           String?               @unique
   phones          String?               @unique
