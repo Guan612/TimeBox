@@ -12,13 +12,17 @@ const {
 const {
     userValidator,
     userExistValidator,
+    bcryptPassword,
+    verifyLogin,
 } = require('../middleware/user.middleware')
+
+const {auth} = require('../middleware/auth.middleware')
 
 //登录
 router.post('/login', userValidator({
     loginid: "string",
     password: "string",
-}), login)
+}), verifyLogin, login)
 
 //注册
 router.post('/register', userValidator({
@@ -27,14 +31,19 @@ router.post('/register', userValidator({
     email:{type:"email",required:false},
     nickname:{type:"string",required:false},
     phone:{type:"string",required:false},
-}), userExistValidator,register)
+}), userExistValidator, bcryptPassword, register)
 
 //更改密码
 router.put('/changepwd',changePwd)
 
 //更改昵称
-router.put('/changenickname',changeNickName)
+router.put('/changenickname', auth, userValidator({
+    nickname: "string",
+}), changeNickName)
 
+
+
+//测试
 router.post('/test', userValidator({
     loginid: "string",
     password: "string",

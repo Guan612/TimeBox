@@ -1,4 +1,11 @@
-const {create} = require('../service/user.service')
+const jwt = require('jsonwebtoken')
+const {JWT_SECRET} = require('../config/config')
+const {
+    create, 
+    findUser, 
+    updateNick
+} = require('../service/user.service')
+
 const {userInfoError} = require('../constant/erro.type')
 class userController {
     //用户注册
@@ -15,7 +22,16 @@ class userController {
 
     //用户登录
     async login(ctx, next) {
-        ctx.body = 'login'
+        const {loginid} = ctx.request.body
+        const {password,createdAt,updatedAt,...res} = await findUser(loginid)
+        ctx.body = {
+            code: 0,
+            message: '登录成功',
+            result: {
+                userInfo: res,
+                token: jwt.sign(res, JWT_SECRET, {expiresIn: '90d'}),
+            }
+        }
     }
 
     //更改用户密码
@@ -27,9 +43,14 @@ class userController {
 
     //更改用户昵称
     async changeNickName(ctx, next) {
-        const {userID,nick_name} = ctx.request.body
-        const res = await updateNickName({user_name,nick_name})
-        ctx.body = 'changeNickName'
+        const {loginid} = ctx.state.user
+        const {nickname} = ctx.request.body
+        const res = await updateNick({nickname,loginid})
+        ctx.body = {
+            code: 0,
+            message: '修改成功',
+            result: res.nickname
+        }
     }
 
 
