@@ -3,8 +3,6 @@ const prisma = require('../db/prisma')
 class userService {
     //注册
     async create(userInfo){
-        // const {userid,password,nickname} = userInfo
-        //console.log(user_name)
         const res =  await prisma.user.create({
             data:userInfo
         })

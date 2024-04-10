@@ -2,8 +2,8 @@ const {create} = require('../service/user.service')
 class userController {
     //用户注册
     async register(ctx, next) {
-        const {user_name, password, email} = ctx.request.body
-        const res = await create({user_name, password, email})
+        const userInfo = ctx.request.body
+        const res = await create(userInfo)
         ctx.body = {
             code: 0,
             message: '注册成功',
@@ -33,6 +33,8 @@ class userController {
 
     //test函数
     async test(ctx, next) {
+        const userInfo = ctx.request.body
+        console.log(userInfo)
         ctx.body = 'test'
     }
 }
