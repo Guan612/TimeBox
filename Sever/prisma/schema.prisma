@@ -24,8 +24,8 @@ model User {
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   userHaderImg    UserHaderImg[]
-  PhotoInfo       PhotoInfo[]
-  PhotoCollection PhotoCollection[]
+  PhotoInfo       PhotoCollectionInfo[]
+  PhotoCollection PhotosList[]
 }
 
 //用户头像表
@@ -39,20 +39,20 @@ model UserHaderImg {
 }
 
 //照片合集信息表
-model PhotoInfo {
+model PhotoCollectionInfo {
   id                Int      @id @default(autoincrement())
   userId            Int
-  photoCollectionId Int      @unique
   photoUrl          String
   photoName         String
   photoDes          String
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   user              User?    @relation(fields: [userId], references: [id])
+  photoslist   PhotosList[]
 }
 
 //照片合集表
-model PhotoCollection {
+model PhotosList {
   id                Int      @id @default(autoincrement())
   userId            Int
   photoCollectionId Int
@@ -61,6 +61,7 @@ model PhotoCollection {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   user              User?    @relation(fields: [userId], references: [id])
+  photoci PhotoCollectionInfo? @relation(fields: [photoCollectionId], references: [id])
 }
 
 //照片管理表
