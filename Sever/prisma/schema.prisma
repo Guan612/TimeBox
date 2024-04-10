@@ -15,44 +15,59 @@ datasource db {
 
 //用户表
 model User {
-  id        Int      @id @default(autoincrement())
-  ncikname  String
-  password  String
-  email     String
-  phones    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              Int               @id @default(autoincrement())
+  loginid         String            @unique
+  ncikname        String
+  password        String
+  email           String            @unique
+  phones          String            @unique
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  userHaderImg    UserHaderImg[]
+  PhotoInfo       PhotoInfo[]
+  PhotoCollection PhotoCollection[]
 }
 
 //用户头像表
 model UserHaderImg {
-  id              Int    @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
   userId          Int
   userHaderImgUrl String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User?    @relation(fields: [userId], references: [id])
 }
 
 //照片合集信息表
 model PhotoInfo {
-  id                Int    @id @default(autoincrement())
+  id                Int      @id @default(autoincrement())
   userId            Int
-  photoCollectionId Int
+  photoCollectionId Int      @unique
   photoUrl          String
   photoName         String
   photoDes          String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User?    @relation(fields: [userId], references: [id])
 }
 
 //照片合集表
 model PhotoCollection {
-  id                Int    @id @default(autoincrement())
+  id                Int      @id @default(autoincrement())
   userId            Int
   photoCollectionId Int
   photoUrl          String
   photoShootTime    String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User?    @relation(fields: [userId], references: [id])
 }
 
 //照片管理表
 model PhotoCollectionMange {
-  id                Int @id @default(autoincrement())
+  id                Int      @id @default(autoincrement())
   userId            Int
   photoCollectionId Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
