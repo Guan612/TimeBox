@@ -10,7 +10,8 @@ url：/register
 
 | 参数名 | 类型 | 是否必须 | 说明 |
 | :----: | :----: | :----: | :----: |
-| user_name | string | 是 | 用户名 | 
+| loginid | string | 是 | 登录id |
+| ncikname | string | 否 | 用户名 |
 | password | string | 是 | 密码 |
 | email | string | 否 | 邮箱 |
 
