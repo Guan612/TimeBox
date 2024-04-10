@@ -9,8 +9,8 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
   //在不创建外键的情况下进行关联查询
   //relationMode = "prisma"
 }
@@ -24,7 +24,7 @@ model User {
   email           String?               @unique
   phones          String?               @unique
   createdAt       DateTime              @default(dbgenerated("now()")) @db.DateTime
-  updatedAt       DateTime              @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)//解决prisma时区问题
+  updatedAt       DateTime              @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0) //解决prisma时区问题
   userHaderImg    UserHaderImg[]
   PhotoInfo       PhotoCollectionInfo[]
   PhotoCollection PhotosList[]
