@@ -4,8 +4,8 @@ import sideBar from './component/sideBar.vue'
 
 <template>
     <div class="common-layout">
-        <el-container class="flex">
-            <el-aside class="bg-cyan-400 w-1/6 flex">
+        <el-container class="">
+            <el-aside class="bg-cyan-400 flex-col">
               <sideBar></sideBar>
             </el-aside>
             <el-container class="w-5/6 flex">
