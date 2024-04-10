@@ -1,9 +1,11 @@
 const {create} = require('../service/user.service')
+const {userInfoError} = require('../constant/erro.type')
 class userController {
     //用户注册
     async register(ctx, next) {
         const userInfo = ctx.request.body
         const res = await create(userInfo)
+        //console.log(res)
         ctx.body = {
             code: 0,
             message: '注册成功',
