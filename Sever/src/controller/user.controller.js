@@ -29,6 +29,12 @@ class userController {
         const res = await updateNickName({user_name,nick_name})
         ctx.body = 'changeNickName'
     }
+
+
+    //test函数
+    async test(ctx, next) {
+        ctx.body = 'test'
+    }
 }
 
 module.exports = new userController()
