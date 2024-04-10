@@ -31,7 +31,7 @@ module.exports = {
       },
       userInfoError: {
           code: '10007',
-          message: '用户信息有误',
+          message: '用户校验信息有误',
           result: '',
       },
       tokenExpiredError: {
