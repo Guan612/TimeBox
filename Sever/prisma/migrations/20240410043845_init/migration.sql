@@ -2,12 +2,12 @@
 CREATE TABLE `User` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `loginid` VARCHAR(191) NOT NULL,
-    `ncikname` VARCHAR(191) NOT NULL,
+    `ncikname` VARCHAR(191) NULL,
     `password` VARCHAR(191) NOT NULL,
-    `email` VARCHAR(191) NOT NULL,
-    `phones` VARCHAR(191) NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `email` VARCHAR(191) NULL,
+    `phones` VARCHAR(191) NULL,
+    `createdAt` DATETIME NOT NULL DEFAULT now(),
+    `updatedAt` TIMESTAMP(0) NOT NULL DEFAULT NOW() ON UPDATE NOW(),
 
     UNIQUE INDEX `User_loginid_key`(`loginid`),
     UNIQUE INDEX `User_email_key`(`email`),
@@ -20,8 +20,8 @@ CREATE TABLE `UserHaderImg` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `userHaderImgUrl` VARCHAR(191) NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME NOT NULL DEFAULT now(),
+    `updatedAt` TIMESTAMP(0) NOT NULL DEFAULT NOW() ON UPDATE NOW(),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -30,11 +30,11 @@ CREATE TABLE `UserHaderImg` (
 CREATE TABLE `PhotoCollectionInfo` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
-    `photoUrl` VARCHAR(191) NOT NULL,
+    `photoUrl` VARCHAR(191) NULL,
     `photoName` VARCHAR(191) NOT NULL,
-    `photoDes` VARCHAR(191) NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `photoDes` VARCHAR(191) NULL,
+    `createdAt` DATETIME NOT NULL DEFAULT now(),
+    `updatedAt` TIMESTAMP(0) NOT NULL DEFAULT NOW() ON UPDATE NOW(),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -44,10 +44,10 @@ CREATE TABLE `PhotosList` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `photoCollectionId` INTEGER NOT NULL,
-    `photoUrl` VARCHAR(191) NOT NULL,
-    `photoShootTime` VARCHAR(191) NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `photoUrl` VARCHAR(191) NULL,
+    `photoShootTime` VARCHAR(191) NULL,
+    `createdAt` DATETIME NOT NULL DEFAULT now(),
+    `updatedAt` TIMESTAMP(0) NOT NULL DEFAULT NOW() ON UPDATE NOW(),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -57,8 +57,8 @@ CREATE TABLE `PhotoCollectionMange` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `photoCollectionId` INTEGER NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
+    `createdAt` DATETIME NOT NULL DEFAULT now(),
+    `updatedAt` TIMESTAMP(0) NOT NULL DEFAULT NOW() ON UPDATE NOW(),
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

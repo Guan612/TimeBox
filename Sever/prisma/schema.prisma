@@ -9,20 +9,22 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  //在不创建外键的情况下进行关联查询
+  //relationMode = "prisma"
 }
 
 //用户表
 model User {
-  id              Int               @id @default(autoincrement())
-  loginid         String            @unique
-  ncikname        String
+  id              Int                   @id @default(autoincrement())
+  loginid         String                @unique
+  ncikname        String?
   password        String
-  email           String            @unique
-  phones          String            @unique
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  email           String?               @unique
+  phones          String?               @unique
+  createdAt       DateTime              @default(dbgenerated("now()")) @db.DateTime
+  updatedAt       DateTime              @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)//解决prisma时区问题
   userHaderImg    UserHaderImg[]
   PhotoInfo       PhotoCollectionInfo[]
   PhotoCollection PhotosList[]
@@ -33,35 +35,35 @@ model UserHaderImg {
   id              Int      @id @default(autoincrement())
   userId          Int
   userHaderImgUrl String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt       DateTime @default(dbgenerated("now()")) @db.DateTime
+  updatedAt       DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
   user            User?    @relation(fields: [userId], references: [id])
 }
 
 //照片合集信息表
 model PhotoCollectionInfo {
-  id                Int      @id @default(autoincrement())
-  userId            Int
-  photoUrl          String
-  photoName         String
-  photoDes          String
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  user              User?    @relation(fields: [userId], references: [id])
-  photoslist   PhotosList[]
+  id         Int          @id @default(autoincrement())
+  userId     Int
+  photoUrl   String?
+  photoName  String
+  photoDes   String?
+  createdAt  DateTime     @default(dbgenerated("now()")) @db.DateTime
+  updatedAt  DateTime     @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
+  user       User?        @relation(fields: [userId], references: [id])
+  photoslist PhotosList[]
 }
 
 //照片合集表
 model PhotosList {
-  id                Int      @id @default(autoincrement())
+  id                Int                  @id @default(autoincrement())
   userId            Int
   photoCollectionId Int
-  photoUrl          String
-  photoShootTime    String
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-  user              User?    @relation(fields: [userId], references: [id])
-  photoci PhotoCollectionInfo? @relation(fields: [photoCollectionId], references: [id])
+  photoUrl          String?
+  photoShootTime    String?
+  createdAt         DateTime             @default(dbgenerated("now()")) @db.DateTime
+  updatedAt         DateTime             @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
+  user              User?                @relation(fields: [userId], references: [id])
+  photoci           PhotoCollectionInfo? @relation(fields: [photoCollectionId], references: [id])
 }
 
 //照片管理表
@@ -69,6 +71,6 @@ model PhotoCollectionMange {
   id                Int      @id @default(autoincrement())
   userId            Int
   photoCollectionId Int
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt         DateTime @default(dbgenerated("now()")) @db.DateTime
+  updatedAt         DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
 }
