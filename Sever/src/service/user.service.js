@@ -25,11 +25,21 @@ class userService {
         return res
     }
 
+    //通过id找用户
+    async findUserById(id){
+        const res = await prisma.user.findUnique({
+            where:{
+                id:id
+            }
+        })
+        return res
+    }
+
     //更新昵称
     async updateNick(userInfo){
         const res = await prisma.user.update({
             where:{
-                loginid:userInfo.loginid
+                id:userInfo.id
             },
             data:{
                 nickname:userInfo.nickname
@@ -43,7 +53,7 @@ class userService {
     async updatePassword(userInfo){
         const res = await prisma.user.update({
             where:{
-                loginid:userInfo.loginid
+                id:userInfo.id
             },
             data:{
                 password:userInfo.newpassword
@@ -52,6 +62,17 @@ class userService {
         return res
     }
 
+
+    //创建头像信息
+    async createHdImg(userInfo){
+        const res = await prisma.userHaderImg.create({
+            data:{
+                userId:userInfo.id,
+                userHaderImgUrl:userInfo.filepath
+            }
+        })
+        return res
+    }
 }
 
 module.exports = new userService()

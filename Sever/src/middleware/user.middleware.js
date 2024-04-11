@@ -8,7 +8,7 @@ const {
     invalidPassword,
     oldPasswordError
 } = require('../constant/erro.type')
-const {findUser} = require('../service/user.service')
+const {findUser,findUserById} = require('../service/user.service')
 //验证必填项目
 const userValidator = (rules) => {
     return async (ctx, next) => {
@@ -73,7 +73,7 @@ const verifyLogin = async (ctx, next) => {
 //验证旧密码并加密新密码
 const verifyOldPassword = async (ctx, next) => {
     const {oldpassword, newpassword} = ctx.request.body;
-    const res = await findUser(ctx.state.user.loginid)
+    const res = await findUserById(ctx.state.user.id)
     const isValid = brypt.compareSync(oldpassword, res.password);
     if (!isValid) {
         return ctx.app.emit('error', oldPasswordError, ctx)

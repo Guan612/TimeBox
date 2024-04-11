@@ -6,6 +6,7 @@ const {
     register,
     changePwd,
     changeNickName,
+    createHaderImg,
     test
 } = require('../controller/user.controller')
 
@@ -44,6 +45,10 @@ router.put('/changepwd', auth, userValidator({
 router.put('/changenickname', auth, userValidator({
     nickname: "string",
 }), changeNickName)
+
+
+//上传头像
+router.post('/uploadHaderImg',auth,createHaderImg)
 
 
 
