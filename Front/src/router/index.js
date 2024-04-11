@@ -27,12 +27,12 @@ const router = createRouter({
       component: userCenter,
       children: [
         {
-          path: '/user',
+          path: '/login',
           name:'login',
           component: login,
         },
         {
-          path:'/user/register',
+          path:'/register',
           name:'register',
           component:register,
         }

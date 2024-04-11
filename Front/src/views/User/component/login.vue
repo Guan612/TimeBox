@@ -1,60 +1,43 @@
 <script setup>
-import {ElButton, ElInput} from 'element-plus'
 import { ref } from 'vue';
 import {useUserStore} from '@/stores/userStore'
+import router from '@/router/index';
 let imgSrc = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_logo_2019.svg')
 
 const userStore = useUserStore()
-const loginId = ref('piya');
+const loginid = ref('piya');
 const password = ref('123456');
 
 const userInfo = ref({
-	loginId,
+	loginid,
 	password
 })
+
+const goregsiter = () => {
+	router.push('/register')
+}
 </script>
 
 <template>
-	<div class="flex justify-center justify-items-center items-center h-screen">
-		<div class="shadow-2xl flex-col card size-200 rounded-lg">
-			<div class="flex flex-row justify-center m-3 md:m-10">
-				<div class="flex mr-2 md:mr-5 w-20 md:w-23 flex-col justify-center">
-					<p class="flex justify-center">登录</p>
-					<img :src="imgSrc">
-				</div>
-				<div class="flex flex-col">
-					<div class="mb-2 md:mb-5">
-						用户
-					</div>
-					<div class="mb-2 md:mb-5">
-						<ElInput placeholder="请输入用户名" v-model:value="user_name"/>
-					</div>
-					<div class="mb-2 md:mb-5">
-						密码
-					</div>
-					<div class="mb-2 md:mb-5">
-						<ElInput placeholder="请输入密码" type="password" v-model:value="password"/>
-					</div>
-				</div>
+	<div class="card" style="width: 25rem;">
+		<div class="card-body">
+			<h5 class="card-title">Login</h5>
+			<div class="mb-3">
+				<label for="loginId" class="form-label">Login ID</label>
+				<el-input v-model="loginId" placeholder="Enter login ID" />
+				<label for="password" class="form-label">Password</label>
+				<el-input v-model="password" type="password" placeholder="Enter password" />
+				<el-Button type="primary" @click="userStore.getuserInfo(userInfo)">Login</el-Button>
 			</div>
-			<div class="flex flex-col justify-center">
-				<div class="flex justify-center mb-3">
-					<ElButton type="info" class="text-black" @click="userStore.handleLogin(userInfo)">登录</ElButton>
-				</div>
-				<div class="flex justify-center">
-					<router-link to="/register">
-						<ElButto strong secondary class="w-100" @click="">还没有注册？</ElButto>
-					</router-link>
-				</div>
+			<div class="mb-3">
+				<el-button type="primary" @click="goregsiter">去注册</el-button>
 			</div>
 		</div>
 	</div>
-
 </template>
 
 <style>
 .card {
 	background: linear-gradient(to right, #5BCEFA, #F5A9B8)
-	
 }
 </style>
