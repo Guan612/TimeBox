@@ -34,6 +34,11 @@ module.exports = {
           message: '用户校验信息有误',
           result: '',
       },
+      oldPasswordError:{
+          code: '10008',
+          message: '旧密码错误',
+          result: '',
+      },
       tokenExpiredError: {
         code: '10101',
         message: 'token已过期',

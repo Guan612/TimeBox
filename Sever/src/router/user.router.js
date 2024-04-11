@@ -14,6 +14,7 @@ const {
     userExistValidator,
     bcryptPassword,
     verifyLogin,
+    verifyOldPassword,
 } = require('../middleware/user.middleware')
 
 const {auth} = require('../middleware/auth.middleware')
@@ -34,7 +35,10 @@ router.post('/register', userValidator({
 }), userExistValidator, bcryptPassword, register)
 
 //更改密码
-router.put('/changepwd',changePwd)
+router.put('/changepwd', auth, userValidator({
+    oldpassword: "string",
+    newpassword: "string",
+}),verifyOldPassword, changePwd)
 
 //更改昵称
 router.put('/changenickname', auth, userValidator({
@@ -44,12 +48,9 @@ router.put('/changenickname', auth, userValidator({
 
 
 //测试
-router.post('/test', userValidator({
-    loginid: "string",
-    password: "string",
-    email:{type:"email",required:false},
-    nickname:{type:"string",required:false},
-    phone:{type:"string",required:false},
-}),userExistValidator, test)
+router.post('/test', auth, userValidator({
+    oldpassword: "string",
+    newpassword: "string",
+}),verifyOldPassword, test)
 
 module.exports = router;

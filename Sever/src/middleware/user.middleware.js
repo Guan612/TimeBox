@@ -5,7 +5,8 @@ const {
     userInfoError,
     userAlreadyExited,
     userDoesNotExist,
-    invalidPassword
+    invalidPassword,
+    oldPasswordError
 } = require('../constant/erro.type')
 const {findUser} = require('../service/user.service')
 //验证必填项目
@@ -69,9 +70,27 @@ const verifyLogin = async (ctx, next) => {
     await next();
 }
 
+//验证旧密码并加密新密码
+const verifyOldPassword = async (ctx, next) => {
+    const {oldpassword, newpassword} = ctx.request.body;
+    const res = await findUser(ctx.state.user.loginid)
+    const isValid = brypt.compareSync(oldpassword, res.password);
+    if (!isValid) {
+        return ctx.app.emit('error', oldPasswordError, ctx)
+    } else {
+        const salt = brypt.genSaltSync(10);
+        // hash保存的是 密文
+        const hash = brypt.hashSync(newpassword, salt);
+        ctx.request.body.newpassword = hash;
+    }
+
+    await next();
+}
+
 module.exports = {
     userValidator,
     userExistValidator,
     bcryptPassword,
     verifyLogin,
+    verifyOldPassword,
 }

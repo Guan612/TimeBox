@@ -3,7 +3,8 @@ const {JWT_SECRET} = require('../config/config')
 const {
     create, 
     findUser, 
-    updateNick
+    updateNick,
+    updatePassword
 } = require('../service/user.service')
 
 const {userInfoError} = require('../constant/erro.type')
@@ -36,20 +37,27 @@ class userController {
 
     //更改用户密码
     async changePwd(ctx, next) {
-        const {userID,old_password,new_password} = ctx.request.body
-        const res = await updatePwd({user_name,old_password,new_password})
-        ctx.body = 'changePassword'
+        const {loginid} = ctx.state.user
+        const {newpassword} = ctx.request.body
+        const res = await updatePassword({loginid,newpassword})
+        ctx.body = {
+            code: 0,
+            message: '修改成功',
+            result: ""
+        }
     }
 
     //更改用户昵称
     async changeNickName(ctx, next) {
         const {loginid} = ctx.state.user
         const {nickname} = ctx.request.body
-        const res = await updateNick({nickname,loginid})
-        ctx.body = {
-            code: 0,
-            message: '修改成功',
-            result: res.nickname
+        const {password,createdAt,updatedAt,...res} = await updateNick({nickname,loginid})
+        if(res){
+            ctx.body = {
+                code: 0,
+                message: '修改成功',
+                result: res.nickname
+            }
         }
     }
 

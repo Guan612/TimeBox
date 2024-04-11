@@ -18,15 +18,10 @@ class userService {
     //验证是否已经注册
     async findUser(loginid){
         const res = await prisma.user.findUnique({
-            // select:{
-            //     id:true,
-            //     password:true,
-            // },
             where:{
                 loginid:loginid
             }
         })
-        //console.log(res)
         return res
     }
 
@@ -45,10 +40,18 @@ class userService {
     }
 
     //更改密码
-    async updatePsd(userInfo){
-        const {user_name,old_password,new_password} = userInfo;
-        return userInfo
+    async updatePassword(userInfo){
+        const res = await prisma.user.update({
+            where:{
+                loginid:userInfo.loginid
+            },
+            data:{
+                password:userInfo.newpassword
+            }
+        })
+        return res
     }
+
 }
 
 module.exports = new userService()
