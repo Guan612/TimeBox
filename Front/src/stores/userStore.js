@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { loginAPI } from '@/apis/user'
+import router from '@/router'
 
 
 //存储用户信息
@@ -9,9 +10,18 @@ export const useUserStore = defineStore(
         const userInfo = ref({})
         const getuserInfo = async (user) => {
             const res = await loginAPI(user)
-            userInfo.value = res.data
+            //console.log(res)
+            userInfo.value = res.result
+            if(res){
+                router.push('/')
+            }
         }
-        return { userInfo, getuserInfo }
+
+        //退出登录
+        const logout = () => {
+         userInfo.value = {}   
+        }
+        return { userInfo, getuserInfo,logout }
     },
     {
         persist: true

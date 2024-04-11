@@ -12,7 +12,7 @@ http.interceptors.request.use(
         const userStore = useUserStore()
         const token = await userStore.userInfo.token
         if(token){
-            config.haders['Authorization'] = `Bearer ${token}`
+            config.headers.Authorization = `Bearer ${token}`
         }
         return config
     },
