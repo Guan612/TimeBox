@@ -11,7 +11,9 @@ http.interceptors.request.use(
     async (config)=>{
         const userStore = useUserStore()
         const token = await userStore.userInfo.token
-        config.haders['Authorization'] = `Bearer ${token}`
+        if(token){
+            config.haders['Authorization'] = `Bearer ${token}`
+        }
         return config
     },
     (error)=>{
