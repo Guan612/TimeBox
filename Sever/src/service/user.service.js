@@ -20,6 +20,9 @@ class userService {
         const res = await prisma.user.findUnique({
             where:{
                 loginid:loginid
+            },
+            include:{
+                userHaderImg:true
             }
         })
         return res
@@ -30,7 +33,7 @@ class userService {
         const res = await prisma.user.findUnique({
             where:{
                 id:id
-            }
+            },
         })
         return res
     }
