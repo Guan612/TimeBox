@@ -75,10 +75,10 @@ class userService {
     }
 
     //查找头像信息
-    async findHdImg(userInfo){
+    async findHdImg(id){
         const res = await prisma.userHaderImg.findUnique({
             where:{
-                userId:userInfo.id
+                userId:id
             }
         })
         return res

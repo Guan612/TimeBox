@@ -5,7 +5,8 @@ const {
     findUser,
     updateNick,
     updatePassword,
-    createHdImg
+    createHdImg,
+    findHdImg
 } = require('../service/user.service')
 
 const { userInfoError } = require('../constant/erro.type')
@@ -92,6 +93,28 @@ class userController {
         }
     }
 
+    //查找头像
+    async findHanderImg(ctx, next) {
+        const { id } = ctx.state.user
+        const res = await findHdImg(id);
+        if(res){
+            ctx.body = {
+                code: 0,
+                message: '查找成功',
+                result: {
+                    haderImgUrl: res.haderImgUrl
+                }
+            }
+        } else {
+            ctx.body = {
+                code: 0,
+                message: '查找失败',
+                result: {
+                    haderImgUrl: ''
+                }
+            }
+        }
+    }
 
 
     //test函数
