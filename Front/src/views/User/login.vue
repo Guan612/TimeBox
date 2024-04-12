@@ -32,8 +32,8 @@ const goregsiter = () => {
 					<el-input v-model="password" style="width: 240px" type="password" placeholder="" show-password />
 				</div>
 			</div>
-			<el-button class="m-2" @click="userStore.getuserInfo(userInfo)" type="success" round>点击登录</el-button>
-			<el-button class="m-2" @click="goregsiter">点击注册</el-button>
+			<el-button class="m-2" @click="userStore.getuserInfo(userInfo)" type="primary" round>点击登录</el-button>
+			<el-button class="m-2" @click="goregsiter" round>点击注册</el-button>
 		</div>
 	</div>
 </template>
