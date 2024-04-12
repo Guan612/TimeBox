@@ -18,7 +18,7 @@ const nickname = ref('田皮鸭')
         <div class="flex flex-row basis-3/4">
             <div class="basis-1/3 content-center">
                 <div class="hidden md:block">
-                    <el-input v-model="search" placeholder="搜索" size="large" class="">
+                    <el-input v-model="search" placeholder="搜索" size="large">
                         <template #append>
                             <el-button :icon="Search" />
                         </template>
@@ -28,9 +28,7 @@ const nickname = ref('田皮鸭')
             <div class="flex flex-row basis-2/3 justify-end">
                 <div class="content-center m-3 md:m-5">{{nickname}}</div>
                 <div class="content-center mr-5 md:mr-8">
-                    <el-avatar :src="haderImg" size="large">
-                        <slot></slot>
-                    </el-avatar>
+                    <el-avatar :src="haderImg" size="large"></el-avatar>
                 </div>
             </div>
         </div>
