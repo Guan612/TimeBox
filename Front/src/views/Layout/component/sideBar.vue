@@ -3,15 +3,11 @@
 </script>
 
 <template>
-  <h1 class="">侧边栏</h1>
-  <p class="">首页</p>
-  <p>编辑合集</p>
-  <p>搜索</p>
-  <p>首页</p>
-  <p>编辑合集</p>
-  <p>搜索</p>
+  <div class="flex flex-col">
+    <div class="h-10 text-center">logo</div>
+    
+    <div class="h-10">3</div>
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
