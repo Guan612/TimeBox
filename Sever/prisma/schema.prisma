@@ -23,6 +23,7 @@ model User {
   password        String
   email           String?               @unique
   phones          String?               @unique
+  isDel           Boolean               @default(false)
   createdAt       DateTime              @default(dbgenerated("now()")) @db.DateTime
   updatedAt       DateTime              @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0) //解决prisma时区问题
   userHaderImg    UserHaderImg[]
@@ -35,6 +36,7 @@ model UserHaderImg {
   id              Int      @id @default(autoincrement())
   userId          Int
   userHaderImgUrl String
+  isDel           Boolean  @default(false)
   createdAt       DateTime @default(dbgenerated("now()")) @db.DateTime
   updatedAt       DateTime @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
   user            User?    @relation(fields: [userId], references: [id])
@@ -47,6 +49,7 @@ model PhotoCollectionInfo {
   photoUrl   String?
   photoName  String
   photoDes   String?
+  isDel      Boolean      @default(false)
   createdAt  DateTime     @default(dbgenerated("now()")) @db.DateTime
   updatedAt  DateTime     @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
   user       User?        @relation(fields: [userId], references: [id])
@@ -60,6 +63,7 @@ model PhotosList {
   photoCollectionId Int
   photoUrl          String?
   photoShootTime    String?
+  isDel             Boolean              @default(false)
   createdAt         DateTime             @default(dbgenerated("now()")) @db.DateTime
   updatedAt         DateTime             @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
   user              User?                @relation(fields: [userId], references: [id])
