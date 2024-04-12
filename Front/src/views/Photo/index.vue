@@ -3,7 +3,9 @@
 </script>
 
 <template>
-    <h1>照片主页</h1>
+    <div class="flex bg-transpink">
+        照片主页
+    </div>
 </template>
 
 <style scoped></style>
