@@ -20,9 +20,6 @@ class userService {
         const res = await prisma.user.findUnique({
             where:{
                 loginid:loginid
-            },
-            include:{
-                userHaderImg:true
             }
         })
         return res
@@ -76,6 +73,17 @@ class userService {
         })
         return res
     }
+
+    //查找头像信息
+    async findHdImg(userInfo){
+        const res = await prisma.userHaderImg.findUnique({
+            where:{
+                userId:userInfo.id
+            }
+        })
+        return res
+    }
+
 }
 
 module.exports = new userService()

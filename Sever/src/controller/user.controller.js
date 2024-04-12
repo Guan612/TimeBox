@@ -31,7 +31,7 @@ class userController {
             message: '登录成功',
             result: {
                 userInfo: res,
-                userhaderimg: BASE_IMG_URL + res.userHaderImg[0].userHaderImgUrl,
+                //userhaderimg: BASE_IMG_URL + res.userHaderImg[0].userHaderImgUrl,
                 token: jwt.sign(res, JWT_SECRET, { expiresIn: '90d' }),
             }
         }
