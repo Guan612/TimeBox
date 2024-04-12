@@ -1,43 +1,44 @@
 <script setup>
+import { Search } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/userStore';
 import router from '@/router';
 import { onMounted, ref } from 'vue';
 const userStore = useUserStore();
-const haderImg = ref('')
-onMounted(() => {
-    haderImg.value = userStore.userInfo.userhaderimg;
-})
+const search = ref('')
+const haderImg = ref('https://img2.imgtp.com/2024/04/09/OmWWam4c.jpg')
+const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_logo_2019.svg')
+const nickname = ref('田皮鸭')
 </script>
 
 <template>
-    <div class="flex-row">
-        <div class="flex-row-center">
-            <div v-if="userStore.userInfo.token">
-                <div v-if="userStore.userInfo.userInfo.nickname" class="flex">
-                    欢迎你：{{ userStore.userInfo.userInfo.nickname }}
-                </div>
-                <div v-else-if="userStore.userInfo.userInfo.loginid">
-                    欢迎你：{{ userStore.userInfo.userInfo.loginid }}
+    <div class="haderBar flex flex-row h-20">
+        <div class="basis-1/4 flex">
+            <img :src="logoImg" class="bg-center w-20 ml-5 hover:scale-110 transition-all duration-300">
+        </div>
+        <div class="flex flex-row basis-3/4">
+            <div class="basis-1/3 content-center">
+                <div class="hidden md:block">
+                    <el-input v-model="search" placeholder="搜索" size="large" class="">
+                        <template #append>
+                            <el-button :icon="Search" />
+                        </template>
+                    </el-input>
                 </div>
             </div>
-            <div v-else>
-                未登录,点击去登录
+            <div class="flex flex-row basis-2/3 justify-end">
+                <div class="content-center m-3 md:m-5">{{nickname}}</div>
+                <div class="content-center mr-5 md:mr-8">
+                    <el-avatar :src="haderImg" size="large">
+                        <slot></slot>
+                    </el-avatar>
+                </div>
             </div>
         </div>
-        <div class="flex">
-            <div v-if="userStore.userInfo.token">
-                <el-avatar :size="40" :src=haderImg></el-avatar>
-            </div>
-            <div v-else>
-                <el-avatar :size="40"
-                    src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
-            </div>
-        </div>
-    </div>
-
-    <div>
-
     </div>
 </template>
 
-<style></style>
+<style>
+.haderBar {
+    background: linear-gradient(to right, #5BCEFA, #F5A9B8)
+}
+</style>
