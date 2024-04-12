@@ -51,7 +51,7 @@ router.put('/changenickname', auth, userValidator({
 router.post('/uploadHaderImg', auth, createHaderImg)
 
 //查找头像
-router.get('/findHaderImg', auth, findHanderImg)
+router.get('/getHaderImg', auth, findHanderImg)
 
 
 //测试
