@@ -1,8 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import layout from '@/views/Layout/index.vue'
-import userCenter from '@/views/User/index.vue'
-import login from '@/views/User/component/login.vue'
-import register from "@/views/User/component/register.vue"
+import login from '@/views/User/login.vue'
+import register from "@/views/User/register.vue"
 import photo from '@/views/Photo/index.vue'
 
 
@@ -22,21 +21,14 @@ const router = createRouter({
       ]
     },
     {
-      path: '/user',
-      name: 'userInfo',
-      component: userCenter,
-      children: [
-        {
-          path: '/login',
-          name:'login',
-          component: login,
-        },
-        {
-          path:'/register',
-          name:'register',
-          component:register,
-        }
-      ]
+      path:'/login',
+      name:'login',
+      component:login
+    },
+    {
+      path:'/register',
+      name:'register',
+      component:register
     }
   ]
 })
