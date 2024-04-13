@@ -14,7 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="flex bg-transpink">
+    <div class="flex bg-white">
         照片主页
     </div>
 </template>
