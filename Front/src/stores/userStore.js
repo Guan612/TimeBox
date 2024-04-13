@@ -2,7 +2,9 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { loginAPI } from '@/apis/user'
 import router from '@/router'
+import { useUserHanderImgStore } from './userHaderImgStore'
 
+const userHanderImgStore = useUserHanderImgStore()
 
 //存储用户信息
 export const useUserStore = defineStore(
@@ -19,7 +21,8 @@ export const useUserStore = defineStore(
 
         //退出登录
         const logout = () => {
-         userInfo.value = {}   
+         userInfo.value = {}
+         userHanderImgStore.userHImg = ''
         }
         return { userInfo, getuserInfo,logout }
     },
