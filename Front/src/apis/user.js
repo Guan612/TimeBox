@@ -11,3 +11,7 @@ export const loginAPI = (userInfo)=>{
 export const changePasswordAPI = (userInfo)=>{
     return http.post("/users/changepwd",userInfo)
 }
+
+export const getUserHanderImgAPI = ()=>{
+    return http.get("/users/gethaderimg")
+}
