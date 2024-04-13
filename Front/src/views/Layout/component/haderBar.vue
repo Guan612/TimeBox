@@ -1,5 +1,5 @@
 <script setup>
-import { Search,Upload,Edit } from '@element-plus/icons-vue'
+import { Search, Upload, Edit } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/userStore';
 import { useUserHanderImgStore } from '@/stores/userHaderImgStore'
 import router from '@/router';
@@ -12,10 +12,8 @@ const userStore = useUserStore();
 const userHanderImgStore = useUserHanderImgStore();
 
 onMounted(() => {
-    if(!haderImg.value){
-        userHanderImgStore.getUserHanderImg();
-        haderImg.value = userHanderImgStore.userHImg;
-    }
+    userHanderImgStore.getUserHanderImg();
+    haderImg.value = userHanderImgStore.userHImg;
 })
 
 const search = ref('')
@@ -29,7 +27,8 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
 <template>
     <div class="haderBar flex flex-row h-15 md:h-20">
         <div class="basis-1/4 flex">
-            <img :src="logoImg" class="bg-center w-20 ml-5 hover:scale-110 transition-all duration-300" @click="router.push('/')">
+            <img :src="logoImg" class="bg-center w-20 ml-5 hover:scale-110 transition-all duration-300"
+                @click="router.push('/')">
         </div>
         <div class="flex flex-row basis-3/4">
             <div class="basis-1/3 content-center">
@@ -46,7 +45,7 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
                     <ElButton :icon="Upload" round>上传照片</ElButton>
                 </div>
                 <div class="content-center block md:hidden md:mr-20">
-                    <ElButton :icon="Upload" circle  type="primary"></ElButton>
+                    <ElButton :icon="Upload" circle type="primary"></ElButton>
                 </div>
                 <div class="content-center hidden md:block md:mr-5">
                     <ElButton :icon="Edit" round>添加合集</ElButton>
@@ -54,7 +53,7 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
                 <div class="content-center block md:hidden md:mr-20">
                     <ElButton class="ml-2" :icon="Edit" circle type="primary"></ElButton>
                 </div>
-                <div class="content-center m-3 md:m-5">{{userStore.userInfo.userInfo.nickname}}</div>
+                <div class="content-center m-3 md:m-5">{{ userStore.userInfo.userInfo.nickname }}</div>
                 <div class="content-center mr-5 md:mr-8">
                     <el-avatar :src="haderImg" size="large"></el-avatar>
                 </div>
