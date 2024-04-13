@@ -67,7 +67,7 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
     </div>
 </template>
 
-<style>
+<style scoped>
 .haderBar {
     background: linear-gradient(to right, #5BCEFA, #F5A9B8)
 }
