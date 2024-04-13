@@ -38,7 +38,7 @@ const goregsiter = () => {
 	</div>
 </template>
 
-<style>
+<style scoped>
 .card {
 	background: linear-gradient(to right, #5BCEFA, #F5A9B8)
 }
