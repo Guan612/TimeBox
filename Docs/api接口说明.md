@@ -21,10 +21,11 @@ url：/register
 ```json
     {
         "code": 0,
-        "msg": "注册成功",
-        "reslut": {
-            "user_name": "admin",
-            "user_id": 1
+        "message": "注册成功",
+        "result": {
+            "id": 2,
+            "loginid": "canary",
+            "nickname": "canary"
         }
     }
 ```
@@ -44,11 +45,17 @@ url：/login
 ```json
     {
         "code": 0,
-        "msg": "登录成功",
-        "reslut": {
-            "user_name": "admin",
-            "user_id": 1,
-            "token":"xxxxxxxxxx"
+        "message": "登录成功",
+        "result": {
+            "userInfo": {
+                "id": 2,
+                "loginid": "canary",
+                "nickname": "canary",
+                "email": "canary@qq.com",
+                "phones": null,
+                "isDel": false
+            },
+            "token": "1234567890"
         }
     }
 ```
@@ -73,6 +80,65 @@ url：/changepwd
         "reslut": ""
     }
 ```
+### 1.4 修改用户昵称
+方法：PUT
+url：/changenickname
+参数：
+
+| 参数名 | 类型 | 是否必须 | 说明 |
+| :----: | :----: | :----: | :----: |
+| nickname | string | 是 | 新昵称 |
+
+返回示例
+
+```json
+    {
+        "code": 0,
+        "msg": "修改用户昵称成功",
+        "reslut": ""
+    }
+```
+
+### 1.5 上传头像
+方法：PUT
+url：/gethaderimg
+参数：
+
+| 参数名 | 类型 | 是否必须 | 说明 |
+| :----: | :----: | :----: | :----: |    
+| file | file | 是 | 头像文件 |
+
+返回示例
+
+```json
+    {
+        "code": 0,
+        "msg": "上传头像成功",
+        "result": {
+            "photo_name": "b411c99464a54b08e60bf7200.jpg",
+            "photo_size": "0.20MB"
+        }
+    }
+```
+
+### 1.6 获取用户头像
+方法：GET
+url：/gethaderimg
+参数：
+
+| 参数名 | 类型 | 是否必须 | 说明 |
+| :----: | :----: | :----: | :----: |
+
+返回示例
+
+```json
+    {
+        "code": 0,
+        "message": "查找成功",
+        "result": "https://img2.imgtp.com/2024/04/09/OmWWam4c.jpg"
+    }
+```
+
 
 ## 2. 照片相关
 一级路由：/photos
