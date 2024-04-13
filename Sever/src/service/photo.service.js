@@ -1,11 +1,14 @@
+const prisma = require('../db/prisma')
+
 class photoService {
-    //首页照片流
+    //首页照片合集流
     async getAll(pageinfo){
         const {page,limit} = pageinfo;
-        return {
-            page:page,
-            limit:limit,
-        }
+        const res = await prisma.photoCollectionInfo.findMany({
+
+        })
+
+        return res;
     }
 }
 

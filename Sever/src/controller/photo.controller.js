@@ -1,10 +1,11 @@
 const {getAll} = require('../service/photo.service')
+const {BASE_IMG_URL} = require('../config/config')
 
 class photoController {
     //获取所有照片
     async getAllPhoto(ctx) {
         const {page,limit} = ctx.request.query;
-        const res = await getAll({page,limit});
+        const res = await getAll({page,limit});        
         ctx.body = {
             code: 0,
             msg: '获取照片成功',
