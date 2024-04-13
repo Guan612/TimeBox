@@ -9,8 +9,8 @@ const props = defineProps({
 </script>
 
 <template>
-    <el-card
-        class="flex flex-col rounded-2xl card m-2 hover:scale-105 transition-all duration-300 ease-in-out shadow-2xl">
+    <el-card style="border-radius: 10px"
+        class="flex flex-col card m-2 hover:scale-105 transition-all duration-300 ease-in-out shadow-2xl">
         <h3>{{collctionName}}</h3>
         <img :src="imgSrc"
             style="width: 100%" />
