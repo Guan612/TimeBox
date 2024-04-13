@@ -2,13 +2,13 @@ const prisma = require('../db/prisma')
 
 class userService {
     //注册用户
-    async create(userInfo){
+    async create(userInfo) {
         const res = await prisma.user.create({
-            data:userInfo,
-            select:{
-                id:true,
-                loginid:true,
-                nickname:true,
+            data: userInfo,
+            select: {
+                id: true,
+                loginid: true,
+                nickname: true,
             }
         })
 
@@ -16,33 +16,33 @@ class userService {
     }
 
     //验证是否已经注册
-    async findUser(loginid){
+    async findUser(loginid) {
         const res = await prisma.user.findUnique({
-            where:{
-                loginid:loginid
+            where: {
+                loginid: loginid
             }
         })
         return res
     }
 
     //通过id找用户
-    async findUserById(id){
+    async findUserById(id) {
         const res = await prisma.user.findUnique({
-            where:{
-                id:id
+            where: {
+                id: id
             },
         })
         return res
     }
 
     //更新昵称
-    async updateNick(userInfo){
+    async updateNick(userInfo) {
         const res = await prisma.user.update({
-            where:{
-                id:userInfo.id
+            where: {
+                id: userInfo.id
             },
-            data:{
-                nickname:userInfo.nickname
+            data: {
+                nickname: userInfo.nickname
             }
         })
 
@@ -50,13 +50,13 @@ class userService {
     }
 
     //更改密码
-    async updatePassword(userInfo){
+    async updatePassword(userInfo) {
         const res = await prisma.user.update({
-            where:{
-                id:userInfo.id
+            where: {
+                id: userInfo.id
             },
-            data:{
-                password:userInfo.newpassword
+            data: {
+                password: userInfo.newpassword
             }
         })
         return res
@@ -64,24 +64,30 @@ class userService {
 
 
     //创建头像信息
-    async createHdImg(userInfo){
+    async createHdImg(userInfo) {
         const res = await prisma.userHaderImg.create({
-            data:{
-                userId:userInfo.id,
-                userHaderImgUrl:userInfo.filepath
+            data: {
+                userId: userInfo.id,
+                userHaderImgUrl: userInfo.filepath
             }
         })
         return res
     }
 
     //查找头像信息
-    async findHdImg(id){
-        const res = await prisma.userHaderImg.findUnique({
-            where:{
-                userId:id
-            }
-        })
-        return res
+    async findHdImg(id) {
+        try {
+            //注意findUnique只能在唯一的时候使用！！！
+            const res = await prisma.userHaderImg.findFirst({
+                where: { 
+                    userId:id,
+                    isDel:false,
+                },
+            });
+            return res;
+        } catch (err) {
+            console.error('Error fetching user header image:', err);
+        }
     }
 
 }
