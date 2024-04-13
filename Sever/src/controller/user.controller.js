@@ -96,14 +96,14 @@ class userController {
     //查找头像
     async findHanderImg(ctx, next) {
         const { id } = ctx.state.user
-        const res = await findHdImg(id);
+        //console.log(id)
+        const {userHaderImgUrl} = await findHdImg(id);
+        const res = BASE_IMG_URL + userHaderImgUrl;
         if(res){
             ctx.body = {
                 code: 0,
                 message: '查找成功',
-                result: {
-                    haderImgUrl: res.haderImgUrl
-                }
+                result: res
             }
         } else {
             ctx.body = {
