@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const { JWT_SECRET, BASE_IMG_URL} = require('../config/config')
+const { JWT_SECRET, BASE_IMG_URL } = require('../config/config')
 const {
     create,
     findUser,
@@ -77,8 +77,8 @@ class userController {
             }
             //将path写入数据库
             const { id } = ctx.state.user
-            const filepath = file.newFilename
-            const res = await createHdImg({id, filepath})
+            const filepath = BASE_IMG_URL + file.newFilename
+            const res = await createHdImg({ id, filepath })
             ctx.body = {
                 code: 0,
                 Message: '图片上传成功',
@@ -87,7 +87,7 @@ class userController {
                     photo_size: fileSize + "MB",
                 }
             }
-            
+
         } else {
             return ctx.app.emit('error', uploadFileError, ctx);
         }
@@ -97,7 +97,7 @@ class userController {
     async findHanderImg(ctx, next) {
         const { id } = ctx.state.user
         const imgres = await findHdImg(id);
-        if(imgres==null){
+        if (imgres == null) {
             ctx.body = {
                 code: 0,
                 message: '还没有照片',
@@ -108,7 +108,7 @@ class userController {
             ctx.body = {
                 code: 0,
                 message: '查找成功',
-                result: BASE_IMG_URL+res
+                result: res
             }
         }
     }
