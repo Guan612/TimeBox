@@ -1,11 +1,18 @@
 <script setup>
 import { MoreFilled, Edit, Share } from '@element-plus/icons-vue'
+import router from '@/router';
 
 const props = defineProps({
+    id: Number,
     collctionName: String,
     imgSrc: String,
     collctionDes: String
 })
+
+//跳转
+const tocoll = (id) => {
+    router.push(`/colle/${id}`)
+}
 </script>
 
 <template>
@@ -15,7 +22,7 @@ const props = defineProps({
         <img :src="imgSrc" style="width: 100%; border-radius: 5px;" fit="cover"/>
         <p>{{ collctionDes }}</p>
         <div class="flex flex-row">
-            <el-button class="mt-2" round :icon="MoreFilled"></el-button>
+            <el-button class="mt-2" round :icon="MoreFilled" @click="tocoll(id)"></el-button>
             <el-button class="mt-2" round :icon="Edit"></el-button>
             <el-button class="mt-2" round :icon="Share"></el-button>
         </div>

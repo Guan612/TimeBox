@@ -50,7 +50,7 @@ onMounted(() => {
         <div class="flex flex-grow">
             <div class="justify-center grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4">
                 <div v-for="item in photoList" :key="item.id">
-                    <collectionCard :collctionName="item.photoName" :imgSrc="item.photoUrl"
+                    <collectionCard :collctionName="item.photoName" :imgSrc="item.photoUrl" :id="item.id"
                         :collctionDes="item.photoDes"></collectionCard>
                 </div>
             </div>
