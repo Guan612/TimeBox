@@ -19,6 +19,7 @@ class photoService {
             include: {
                 photoslist: {
                     select: {
+                        id: true,
                         userId: true,
                         photoUrl: true,
                     }
