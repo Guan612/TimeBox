@@ -9,9 +9,39 @@ const getphoto = async () => {
     photoList.value = res.reslut
 }
 
+const activities = [
+  {
+    timestamp: '2024',
+  },
+  {
+    timestamp: '2023',
+  },
+  {
+    timestamp: '2022',
+  },
+  {
+    timestamp: '2021',
+  },
+  {
+    timestamp: '2020',
+  },
+  {
+    timestamp: '2019',
+  },
+  {
+    timestamp: '2018',
+  },
+  {
+    timestamp: '2017',
+  },
+  {
+    timestamp: '2016',
+  },
+]
+
 onMounted(() => {
     getphoto()
-    console.log(photoList)
+    //console.log(photoList)
 })
 </script>
 
@@ -20,17 +50,21 @@ onMounted(() => {
         <div class="flex flex-grow">
             <div class="justify-center grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4">
                 <div v-for="item in photoList" :key="item.id">
-                    <collectionCard 
-                    :collctionName="item.photoName"
-                    :imgSrc="item.photoUrl"
-                    :collctionDes="item.photoDes"
-                    ></collectionCard>
+                    <collectionCard :collctionName="item.photoName" :imgSrc="item.photoUrl"
+                        :collctionDes="item.photoDes"></collectionCard>
                 </div>
             </div>
 
         </div>
-        <div class="w-1/5">时间线</div>
+        <div class="w-1/5 mr-2">
+            <el-timeline>
+                <el-timeline-item v-for="(activity, index) in activities" :key="index" 
+                    :timestamp="activity.timestamp">
+                </el-timeline-item>
+            </el-timeline>
+        </div>
     </div>
+    <el-backtop :right="80" :bottom="80" />
 </template>
 
 <style scoped></style>
