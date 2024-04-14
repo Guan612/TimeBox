@@ -1,4 +1,4 @@
-const {getAll} = require('../service/photo.service')
+const {getAll,getDetailed } = require('../service/photo.service')
 const {BASE_IMG_URL} = require('../config/config')
 
 class photoController {
@@ -15,8 +15,8 @@ class photoController {
 
     //获取照片合集详细信息
     async getDetailedColl(ctx){
-        const {id} = ctx.request.query;
-        const res = await getDetailed(id);
+        const {id} = ctx.request.params;
+        const res = await getDetailed(id*1);
         ctx.body = {
             code: 0,
             msg: '获取照片详细信息成功',
