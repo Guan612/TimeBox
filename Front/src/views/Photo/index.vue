@@ -63,8 +63,8 @@ onMounted(() => {
                 </el-timeline-item>
             </el-timeline>
         </div>
+        <el-backtop :right="80" :bottom="80" />
     </div>
-    <el-backtop :right="80" :bottom="80" />
 </template>
 
 <style scoped></style>
