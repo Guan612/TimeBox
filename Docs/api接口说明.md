@@ -60,6 +60,7 @@ url：/login
     }
 ```
 
+
 ### 1.3 修改密码
 方法：PUT
 url：/changepwd
@@ -138,7 +139,31 @@ url：/gethaderimg
         "result": "https://img2.imgtp.com/2024/04/09/OmWWam4c.jpg"
     }
 ```
+### 1.7 获取用户信息
+方法：GET
+url：/:user_id
+参数：
 
+| 参数名 | 类型 | 是否必须 | 说明 |
+| :----: | :----: | :----: | :----: |    
+| user_id | int | 是 | 用户id | 
+
+返回示例
+
+```json
+    {
+        "code": 0,
+        "message": "查找成功",
+        "result": {
+            "id": 2,
+            "loginid": "canary",
+            "nickname": "canary",
+            "email": "canary@qq.com",
+            "phones": null,
+            "isDel": false
+        }
+}
+```
 
 ## 2. 照片相关
 一级路由：/photos
