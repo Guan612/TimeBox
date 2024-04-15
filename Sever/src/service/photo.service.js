@@ -13,6 +13,7 @@ class photoService {
         return res;
     }
 
+    //获取照片详细信息流
     async getDetailed(id) {
         const res = await prisma.photoCollectionInfo.findUnique({
             where: {
@@ -72,6 +73,19 @@ class photoService {
             }
         })
 
+        return res;
+    }
+
+    //搜索照片合集
+    async search(keyword) {
+        const res = await prisma.photoCollectionInfo.findMany({
+            where: {
+                photoName: {
+                    contains: keyword
+                },
+                isDel: false
+            }
+        })
         return res;
     }
 

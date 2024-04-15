@@ -1,10 +1,11 @@
-const { 
-    getAll, 
-    getDetailed, 
+const {
+    getAll,
+    getDetailed,
     add,
     update,
     addPhoto,
     deleteCl,
+    search,
 } = require('../service/photo.service')
 const { BASE_IMG_URL } = require('../config/config')
 const { unSupportedFileType, uploadFileError } = require('../constant/erro.type')
@@ -59,7 +60,7 @@ class photoController {
     //删除照片信息
     async delPhotoColl(ctx) {
         const { id } = ctx.request.params;
-        const res = await deleteCl(id*1);
+        const res = await deleteCl(id * 1);
         ctx.body = {
             code: 0,
             msg: '删除照片信息成功',
@@ -80,9 +81,9 @@ class photoController {
             }
             //将path写入数据库
             const { id } = ctx.state.user
-            const {photoCollectionId} = ctx.request.body
+            const { photoCollectionId } = ctx.request.body
             const filepath = BASE_IMG_URL + file.newFilename
-            const res = await addPhoto({ id, photoCollectionId,filepath})
+            const res = await addPhoto({ id, photoCollectionId, filepath })
             ctx.body = {
                 code: 0,
                 Message: '图片上传成功',
@@ -94,6 +95,17 @@ class photoController {
 
         } else {
             return ctx.app.emit('error', uploadFileError, ctx);
+        }
+    }
+
+    //照片搜索
+    async searchPhoto(ctx) {
+        const { keyword } = ctx.request.query;
+        const res = await search(keyword);
+        ctx.body = {
+            code: 0,
+            msg: '搜索照片成功',
+            reslut: res
         }
     }
 }

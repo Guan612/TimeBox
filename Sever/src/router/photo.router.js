@@ -2,6 +2,7 @@ const Router = require('@koa/router');
 const router = new Router();
 const {
     getAllPhoto,
+    searchPhoto,
     getDetailedColl,
     addPhotoColl,
     updatePhotoColl,
@@ -14,6 +15,9 @@ const { photoValidator } = require('../middleware/photo.middleware');
 
 //获取照片列表
 router.get('/', getAllPhoto)
+
+//照片集搜索
+router.get('/search', auth, searchPhoto)
 
 //获取照片合集详细信息(photo_collection_id)
 router.get('/:id', getDetailedColl)
