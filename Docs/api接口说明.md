@@ -307,3 +307,25 @@ url：/:photo_id
         "reslut": ""
     }
 ```
+
+### 2.6 添加照片
+方法：POST
+url：/uploads
+参数：
+
+| 参数名 | 类型 | 是否必须 | 说明 |
+| :----: | :----: | :----: | :----: |    
+| photo_collection_id | int | 是 | 照片合集id |
+| photo_name | string | 否 | 照片名称 |
+| photo_url | string | 否 | 照片url |
+| photo_desc | string | 否 | 照片描述 |
+| photo_shoot_time | string | 否 | 照片拍摄时间 |
+
+返回示例
+```json
+    {
+        "code": 0,
+        "msg": "添加照片成功",
+        "reslut": ""
+    }
+```
