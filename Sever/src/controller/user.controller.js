@@ -4,6 +4,7 @@ const {
     create,
     findUser,
     updateNick,
+    findUserById,
     updatePassword,
     createHdImg,
     findHdImg
@@ -35,6 +36,17 @@ class userController {
                 //userhaderimg: BASE_IMG_URL + res.userHaderImg[0].userHaderImgUrl,
                 token: jwt.sign(res, JWT_SECRET, { expiresIn: '90d' }),
             }
+        }
+    }
+
+    //查询用户信息
+    async findUserInfo(ctx, next) {
+        const { id } = ctx.state.user
+        const {password, createdAt, updatedAt, ...res } = await findUserById(id)
+        ctx.body = {
+            code: 0,
+            message: '查询成功',
+            result: res
         }
     }
 

@@ -4,6 +4,7 @@ const router = new Router();
 const {
     login,
     register,
+    findUserInfo,
     changePwd,
     changeNickName,
     createHaderImg,
@@ -35,6 +36,9 @@ router.post('/register', userValidator({
     nickname:{type:"string",required:false},
     phone:{type:"string",required:false},
 }), userExistValidator, bcryptPassword, register)
+
+//查找用户信息
+router.get('/',auth, findUserInfo)
 
 //更改密码
 router.put('/changepwd', auth, userValidator({
