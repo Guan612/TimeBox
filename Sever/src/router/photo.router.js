@@ -1,16 +1,16 @@
 const Router = require('@koa/router');
 const router = new Router();
-const { 
-    getAllPhoto, 
-    getDetailedColl, 
-    addPhotoColl, 
-    updatePhotoColl, 
-    delPhotoColl, 
-    uploadPhoto 
+const {
+    getAllPhoto,
+    getDetailedColl,
+    addPhotoColl,
+    updatePhotoColl,
+    delPhotoColl,
+    uploadPhoto
 } = require('../controller/photo.controller');
 
 const { auth } = require('../middleware/auth.middleware');
-const {photoValidator} = require('../middleware/photo.middleware');
+const { photoValidator } = require('../middleware/photo.middleware');
 
 //获取照片列表
 router.get('/', getAllPhoto)
@@ -21,7 +21,8 @@ router.get('/:id', getDetailedColl)
 //添加照片集
 router.post('/', auth, photoValidator({
     photoName: 'string',
-    photoDesc: {type: 'string', required: false},
+    photoDesc: { type: 'string', required: false },
+    photoUrl: { type: 'string', required: false }
 }), addPhotoColl)
 
 //修改照片合集信息

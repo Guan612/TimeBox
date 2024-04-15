@@ -47,7 +47,7 @@ class photoController {
     //修改照片集信息
     async updatePhotoColl(ctx) {
         const res = ctx.request.body;
-        const { id } = ctx.state.params;
+        const { id } = ctx.request.params;
         const reslut = await update({ id, ...res });
         ctx.body = {
             code: 0,
@@ -58,8 +58,8 @@ class photoController {
 
     //删除照片信息
     async delPhotoColl(ctx) {
-        const { id } = ctx.state.params;
-        const res = await deleteCl(id);
+        const { id } = ctx.request.params;
+        const res = await deleteCl(id*1);
         ctx.body = {
             code: 0,
             msg: '删除照片信息成功',
