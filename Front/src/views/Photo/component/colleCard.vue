@@ -1,7 +1,10 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
+import {ArrowLeftBold } from '@element-plus/icons-vue'
+
 import { getPhotoCollectionAPI } from '@/apis/photo'
+import { backindex } from './function'
 const { params } = useRoute();
 
 const photoCollId = ref('');
@@ -20,21 +23,33 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="flex flex-row justify-center items-center w-full h-full">
-        <div class="justify-center items-center w-2/3">
-            <el-carousel :interval="5000" arrow="always">
-                <el-carousel-item v-for="item in photoColl.photoslist" :key="item.id">
-                    <el-image :src="item.photoUrl" :zoom-rate="1.2" :max-scale="7" :min-scale="0.2"
-                        :preview-src-list="srcList" :initial-index="4" fit="contain" loading="lazy" />
-                </el-carousel-item>
-            </el-carousel>
+    <div class="flex flex-col m-1">
+        <div class="flex flex-row m-1">
+            <div class="justify-center items-center">
+                <el-button round :icon="ArrowLeftBold" @click="backindex"></el-button>
+            </div>
+            <div class="justify-center text-center">
+                用户名
+            </div>
+        </div>
+        <div class="flex flex-row justify-center items-center w-full h-full m-1">
+            <div class="justify-center items-center w-2/3">
+                <el-carousel :interval="5000" arrow="always" class="rounded-lg">
+                    <el-carousel-item v-for="item in photoColl.photoslist" :key="item.id">
+                        <el-image :src="item.photoUrl" loading="lazy" class="max-w-full h-auto" />
+                    </el-carousel-item>
+                </el-carousel>
+            </div>
+            <div class="w-1/3 m-1">
+                <div class="italic antialiased font-bold">{{ photoColl.photoName }}</div>
+                <div>{{ photoColl.photoDes}}</div>
+            </div>
         </div>
         <div>
-            <div>照片名字区</div>
-            <div>照片描述区</div>
+            功能按钮
         </div>
-
     </div>
+
 </template>
 
 <style scoped></style>
