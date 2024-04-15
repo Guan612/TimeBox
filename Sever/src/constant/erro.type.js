@@ -51,6 +51,6 @@ module.exports = {
       },
       createPhotoCardError:{
         code: '10203',
-        message: '创建照片合集记录失败',
+        message: '创建照片合集信息错误',
       }
 }
