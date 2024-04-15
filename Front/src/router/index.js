@@ -16,24 +16,28 @@ const router = createRouter({
         {
           path: '/',
           name: 'home',
-          component:photo
+          component:photo,
+          meta: {title: "首页"},
         },
         {
           path: '/colle/:id',
           name: 'collection',
-          component:colleCard
+          component:colleCard,
+          meta: {title: "照片合集详情"},
         }
       ]
     },
     {
       path:'/login',
       name:'login',
-      component:login
+      component:login,
+      meta: {title: "登录"},
     },
     {
       path:'/register',
       name:'register',
-      component:register
+      component:register,
+      meta: {title: "注册"},
     }
   ]
 })
