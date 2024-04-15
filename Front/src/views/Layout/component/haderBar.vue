@@ -35,7 +35,7 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
                 <div class="hidden md:block">
                     <el-input v-model="search" placeholder="搜索" size="large">
                         <template #append>
-                            <el-button :icon="Search" />
+                            <el-button :icon="Search" @click="router.push('/searchres')"/>
                         </template>
                     </el-input>
                 </div>
