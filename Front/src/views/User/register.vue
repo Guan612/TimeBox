@@ -7,17 +7,13 @@ import { checkboxEmits } from 'element-plus';
 
 let imgSrc = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_logo_2019.svg')
 
-const loginid = ref('');
-const password = ref('');
-const nickname = ref('');
-const email = ref('');
-const phone = ref('');
+//表单数据
 const userInfo = ref({
-    loginid,
-    password,
-    nickname,
-    email,
-    phone
+    loginid:"",
+    password:"",
+    nickname:"",
+    email:"",
+    phones:""
 });
 
 const gologin = async () => {
@@ -60,24 +56,24 @@ const rules = ref({
                 <div class="mr-2 md:m-3 lg:m-8 hidden md:block">
                     <img :src="imgSrc" alt="" class="w-20 h-10">
                 </div>
-                <el-form :rules='rules' label-position="right" label-width="auto">
+                <el-form :rules='rules' label-position="right" label-width="auto" v-model="userInfo">
                     <el-form-item label="登录id" prop="loginid">
-                        <el-input v-model="loginid" style="width: 240px" placeholder="必填" clearable
+                        <el-input v-model="userInfo.loginid" style="width: 240px" placeholder="必填" clearable
                             :suffixIcon="Avatar" />
                     </el-form-item>
                     <el-form-item label="密码" prop="password">
-                        <el-input v-model="password" style="width: 240px" type="password" placeholder="必填" show-password
+                        <el-input v-model="userInfo.password" style="width: 240px" type="password" placeholder="必填" show-password
                             :suffixIcon="Key" />
                     </el-form-item>
                     <el-form-item label="昵称" prop="nickname">
-                        <el-input v-model="nickname" style="width: 240px" placeholder="必填" clearable />
+                        <el-input v-model="userInfo.nickname" style="width: 240px" placeholder="必填" clearable />
                     </el-form-item>
                     <el-form-item label="邮箱" prop="email">
-                        <el-input v-model="email" style="width: 240px" placeholder="" clearable
+                        <el-input v-model="userInfo.email" style="width: 240px" placeholder="" clearable
                             :suffix-icon="Message" />
                     </el-form-item>
                     <el-form-item label="手机" prop="phone">
-                        <el-input v-model="phone" style="width: 240px" placeholder="" clearable
+                        <el-input v-model="userInfo.phones" style="width: 240px" placeholder="" clearable
                             :suffix-icon="PhoneFilled" />
                     </el-form-item>
                 </el-form>
