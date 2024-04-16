@@ -55,13 +55,13 @@ const rules = ref({
 
 <template>
     <div class="flex justify-center items-center h-screen">
-        <div class="flex flex-col items-center bg-gray-200 p-6 rounded-lg card shadow-2xl">
+        <div class="flex flex-col items-center p-6 md:p-10 lg:p-15 rounded-lg card shadow-2xl">
             <div class="flex items-center mb-4">
-                <div class="mr-2 hidden md:block">
+                <div class="mr-2 md:m-3 lg:m-8 hidden md:block">
                     <img :src="imgSrc" alt="" class="w-20 h-10">
                 </div>
-                <el-form :rules='rules'>
-                    <el-form-item label="id" prop="loginid">
+                <el-form :rules='rules' label-position="right" label-width="auto">
+                    <el-form-item label="登录id" prop="loginid">
                         <el-input v-model="loginid" style="width: 240px" placeholder="必填" clearable
                             :suffixIcon="Avatar" />
                     </el-form-item>
