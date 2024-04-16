@@ -33,7 +33,7 @@ const goregsiter = () => {
 				</div>
 			</div>
 			<el-button class="m-2" @click="userStore.getuserInfo(userInfo)" type="primary" round>点击登录</el-button>
-			<el-button class="m-2" @click="goregsiter" round>点击注册</el-button>
+			<el-button class="m-2" @click="goregsiter" round>还没有注册？点击注册</el-button>
 		</div>
 	</div>
 </template>
