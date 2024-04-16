@@ -3,14 +3,15 @@ import { ref } from 'vue';
 import { useUserStore } from '@/stores/userStore'
 import router from '@/router/index';
 let imgSrc = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_logo_2019.svg')
+import { PhoneFilled, Message, Avatar, Key } from '@element-plus/icons-vue'
 
 const userStore = useUserStore()
-const loginid = ref('piya');
-const password = ref('123456');
+// const loginid = ref('piya');
+// const password = ref('123456');
 
 const userInfo = ref({
-	loginid,
-	password
+	loginid:'',
+	password:''
 })
 
 const goregsiter = () => {
@@ -38,13 +39,13 @@ const rules = ref({
 				<div class="mr-2 md:m-3 lg:m-8 hidden md:block">
 					<img :src="imgSrc" alt="" class="w-20 h-10">
 				</div>
-				<el-form :rules='rules' label-position="right" label-width="auto">
+				<el-form :rules='rules' label-position="right" label-width="auto" v-model="userInfo">
 					<el-form-item label="登录id" prop="loginid">
-						<el-input v-model="loginid" style="width: 240px" placeholder="必填" clearable
+						<el-input v-model="userInfo.loginid" style="width: 240px" placeholder="必填" clearable
 							:suffixIcon="Avatar" />
 					</el-form-item>
 					<el-form-item label="密码" prop="password">
-						<el-input v-model="password" style="width: 240px" type="password" placeholder="必填" show-password
+						<el-input v-model="userInfo.password" style="width: 240px" type="password" placeholder="必填" show-password
 							:suffixIcon="Key" />
 					</el-form-item>
 				</el-form>
