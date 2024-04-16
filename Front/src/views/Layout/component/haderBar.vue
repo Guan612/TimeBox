@@ -2,6 +2,7 @@
 import { Search, Upload, Edit } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/userStore';
 import { useUserHanderImgStore } from '@/stores/userHaderImgStore'
+import {useSearchStore} from '@/stores/searchStore'
 import router from '@/router';
 import { onMounted, ref } from 'vue';
 import { ElButton } from 'element-plus';
@@ -10,13 +11,20 @@ import { ElButton } from 'element-plus';
 
 const userStore = useUserStore();
 const userHanderImgStore = useUserHanderImgStore();
+const searchStore = useSearchStore();
+
+
+const searchclick = () =>{
+    searchStore.keyword = keyword.value;
+    searchStore.search()
+}
 
 onMounted(() => {
     userHanderImgStore.getUserHanderImg();
     haderImg.value = userHanderImgStore.userHImg;
 })
 
-const search = ref('')
+const keyword = ref('')
 const haderImg = ref('')
 const testimg = ref('https://img2.imgtp.com/2024/04/09/OmWWam4c.jpg')
 const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_logo_2019.svg')
@@ -33,9 +41,9 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
         <div class="flex flex-row basis-3/4">
             <div class="basis-1/3 content-center">
                 <div class="hidden md:block">
-                    <el-input v-model="search" placeholder="搜索" size="large">
+                    <el-input v-model="keyword" placeholder="搜索" size="large">
                         <template #append>
-                            <el-button :icon="Search" @click="router.push('/searchres')"/>
+                            <el-button :icon="Search" @click="searchclick"/>
                         </template>
                     </el-input>
                 </div>

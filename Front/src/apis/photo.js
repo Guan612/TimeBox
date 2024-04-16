@@ -29,3 +29,8 @@ export const deletePhotoCollectionAPI = (pCId) => {
 export const uploadPhotoAPI = (data) => {
     return http.post("/photos/upload", data);
 }
+
+//搜索照片集
+export const searchPhotoCollectionAPI = (keyword) => {
+    return http.get(`/photos/search?keyword=${keyword}`);
+}
