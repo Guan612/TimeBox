@@ -2,7 +2,7 @@
 import { Search, Upload, Edit } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/userStore';
 import { useUserHanderImgStore } from '@/stores/userHaderImgStore'
-import {useSearchStore} from '@/stores/searchStore'
+import { useSearchStore } from '@/stores/searchStore'
 import router from '@/router';
 import { onMounted, ref } from 'vue';
 import { ElButton } from 'element-plus';
@@ -14,7 +14,7 @@ const userHanderImgStore = useUserHanderImgStore();
 const searchStore = useSearchStore();
 
 
-const searchclick = () =>{
+const searchclick = () => {
     searchStore.keyword = keyword.value;
     searchStore.search()
 }
@@ -43,7 +43,7 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
                 <div class="hidden md:block">
                     <el-input v-model="keyword" placeholder="搜索" size="large">
                         <template #append>
-                            <el-button :icon="Search" @click="searchclick"/>
+                            <el-button :icon="Search" @click="searchclick" />
                         </template>
                     </el-input>
                 </div>
@@ -61,7 +61,9 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
                 <div class="content-center block md:hidden md:mr-20">
                     <ElButton class="ml-2" :icon="Edit" circle type="primary"></ElButton>
                 </div>
-                <div class="content-center m-3 md:m-5">{{ userStore.userInfo.userInfo.nickname }}</div>
+                <RouterLink to="/user" class="content-center m-3 md:m-5">
+                    <div>{{ userStore.userInfo.userInfo.nickname }}</div>
+                </RouterLink>
                 <div class="content-center mr-5 md:mr-8">
                     <el-avatar :src="haderImg" size="large"></el-avatar>
                 </div>
