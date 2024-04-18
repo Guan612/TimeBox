@@ -7,7 +7,8 @@ import router from '@/router';
 <template>
   <div class="flex flex-col bg-transblue h-screen">
     <div class="mt-5">
-      <div class="m-10">首页</div>
+      <div class="m-10 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer"
+        @click="router.push('/')">首页</div>
       <div class="m-10">来到杜比影院</div>
       <div class="m-10">杜比影院在哪儿？</div>
     </div>
