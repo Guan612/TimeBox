@@ -34,11 +34,11 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
 
 <template>
     <div class="haderBar flex flex-row h-15 md:h-20">
-        <div class="basis-1/4 flex">
-            <img :src="logoImg" class="bg-center w-20 ml-5 hover:scale-110 transition-all duration-300"
-                @click="router.push('/')">
+        <div class="basis-1/6 flex">
+            <!--  <img :src="logoImg" class="bg-center w-20 ml-5 hover:scale-110 transition-all duration-300"
+                @click="router.push('/')"> -->
         </div>
-        <div class="flex flex-row basis-3/4">
+        <div class="flex flex-row basis-5/6">
             <div class="basis-1/3 content-center">
                 <div class="hidden md:block">
                     <el-input v-model="keyword" placeholder="搜索" size="large">
