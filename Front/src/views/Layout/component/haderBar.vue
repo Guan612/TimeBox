@@ -35,7 +35,7 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
 <template>
     <div class="flex flex-row h-15 md:h-20 bg-gradient-to-r from-transblue to-transpink">
         <div class="basis-1/6 flex justify-center content-center">
-            <img :src="logoImg" class="bg-center w-20 ml-5 hover:scale-110 transition-all duration-300"
+            <img :src="logoImg" class="bg-center w-20 hover:scale-110 transition-all duration-300"
                 @click="router.push('/')">
         </div>
         <div class="flex flex-row basis-5/6">
