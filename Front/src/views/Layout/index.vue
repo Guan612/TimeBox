@@ -13,9 +13,11 @@ import sideBar from './component/sideBar.vue'
     </div> -->
     <div class="flex flex-col h-screen">
         <haderBar></haderBar>
-        <div class="flex flex-row flex-1 overflow-hidden">
+        <div class="flex flex-row overflow-hidden">
             <sideBar class="basis-1/6 hidden md:block"></sideBar>
-            <router-view class="basis-5/6 flex-1"></router-view>
+            <div class="md:w-5/6 overflow-y-auto w-screen"> <!-- 使用 overflow-y-auto 允许垂直滚动 -->
+                <router-view></router-view>
+            </div>
         </div>
     </div>
 </template>
