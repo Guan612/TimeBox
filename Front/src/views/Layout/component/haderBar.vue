@@ -61,7 +61,7 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
                 <div class="content-center block md:hidden md:mr-20">
                     <ElButton class="ml-2" :icon="Edit" circle type="primary"></ElButton>
                 </div>
-                <RouterLink to="/user" class="content-center m-3 md:m-5">
+                <RouterLink to="/user" class="content-center m-3 md:m-5" style="text-decoration: none; color: white;">
                     <div>{{ userStore.userInfo.userInfo.nickname }}</div>
                 </RouterLink>
                 <div class="content-center mr-5 md:mr-8">
