@@ -6,6 +6,8 @@ import photo from '@/views/Photo/index.vue'
 import colleCard from '@/views/Photo/component/colleCard.vue'
 import searchRes from '@/views/Searchres/index.vue'
 import userCenter from '@/views/User/userCenter.vue'
+import addColle from '@/views/Photo/addColle.vue'
+import uplaodPhoto from '@/views/Photo/uplaodPhoto.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +41,18 @@ const router = createRouter({
           component:userCenter,
           meta: {title: "个人中心"},
         },
+        {
+          path:'/addcolle',
+          name:'addcolle',
+          component:addColle,
+          meta: {title: "新建合集"},
+        },
+        {
+          path:'/uplaodphoto',
+          name:'uplaodphoto',
+          component:uplaodPhoto,
+          meta: {title: "上传照片"},
+        }
       ]
     },
     {

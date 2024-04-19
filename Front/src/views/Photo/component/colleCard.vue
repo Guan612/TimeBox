@@ -23,20 +23,20 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="flex flex-col m-1">
+    <div class="flex flex-col m-2 border-dotted border-2 rounded-2xl">
         <div class="flex flex-row m-1">
             <div class="justify-center items-center">
                 <el-button round :icon="ArrowLeftBold" @click="backindex"></el-button>
             </div>
-            <div class="justify-center text-center">
-                用户名
+            <div class="justify-center items-center">
+                田皮鸭
             </div>
         </div>
-        <div class="flex flex-row justify-center items-center w-full h-full m-1">
+        <div class="flex flex-row justify-center items-center w-full m-1">
             <div class="justify-center items-center w-2/3">
-                <el-carousel :interval="5000" arrow="always" class="rounded-lg">
+                <el-carousel :interval="5000" arrow="always" height="500px" class="rounded-lg">
                     <el-carousel-item v-for="item in photoColl.photoslist" :key="item.id">
-                        <el-image :src="item.photoUrl" loading="lazy" class="max-w-full h-auto" />
+                        <el-image :src="item.photoUrl" class="max-w-full h-auto"/>
                     </el-carousel-item>
                 </el-carousel>
             </div>

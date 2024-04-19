@@ -34,7 +34,7 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
 
 <template>
     <div class="flex flex-row h-15 md:h-20 bg-gradient-to-r from-transblue to-transpink">
-        <div class="basis-1/6 flex justify-center content-center">
+        <div class="basis-1/6 flex justify-center content-center m-2">
             <img :src="logoImg" class="bg-center w-20 hover:scale-110 transition-all duration-300"
                 @click="router.push('/')">
         </div>
@@ -50,16 +50,17 @@ const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_l
             </div>
             <div class="flex flex-row basis-2/3 justify-end" v-if="userStore.userInfo.token">
                 <div class="content-center hidden md:block md:m-5">
-                    <ElButton :icon="Upload" round>上传照片</ElButton>
+                    <ElButton :icon="Upload" round @click="router.push('/uplaodphoto')">上传照片</ElButton>
                 </div>
                 <div class="content-center block md:hidden md:mr-20">
-                    <ElButton :icon="Upload" circle type="primary"></ElButton>
+                    <ElButton :icon="Upload" circle type="primary" @click="router.push('/uplaodphoto')"></ElButton>
                 </div>
                 <div class="content-center hidden md:block md:mr-5">
-                    <ElButton :icon="Edit" round>添加合集</ElButton>
+                    <ElButton :icon="Edit" round @click="router.push('/addcolle')">添加合集</ElButton>
                 </div>
                 <div class="content-center block md:hidden md:mr-20">
-                    <ElButton class="ml-2" :icon="Edit" circle type="primary"></ElButton>
+                    <ElButton class="ml-2" :icon="Edit" circle type="primary" @click="router.push('/addcolle')">
+                    </ElButton>
                 </div>
                 <RouterLink to="/user" class="content-center m-3 md:m-5" style="text-decoration: none; color: white;">
                     <div>{{ userStore.userInfo.userInfo.nickname }}</div>

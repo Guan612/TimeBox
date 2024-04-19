@@ -19,7 +19,7 @@ const tocoll = (id) => {
     <el-card style="border-radius: 10px"
         class="flex flex-col card m-2 hover:scale-105 transition-all duration-300 ease-in-out shadow-2xl">
         <h3>{{ collctionName }}</h3>
-        <el-image :src="imgSrc" style="width: 100%; border-radius: 5px;" fit="cover"/>
+        <el-image :src="imgSrc" style="width: 100%; border-radius: 5px;" fit="cover" lazy/>
         <p>{{ collctionDes }}</p>
         <div class="flex flex-row">
             <el-button class="mt-2" round :icon="MoreFilled" @click="tocoll(id)"></el-button>
