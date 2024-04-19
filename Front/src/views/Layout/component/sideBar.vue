@@ -7,10 +7,13 @@ import router from '@/router';
 <template>
   <div class="flex flex-col bg-transblue h-screen">
     <div class="mt-5">
-      <div class="m-10 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer"
+      <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer"
         @click="router.push('/')">首页</div>
-      <div class="m-10">来到杜比影院</div>
-      <div class="m-10">杜比影院在哪儿？</div>
+      <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer">我的照片集</div>
+      <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer">最爱精选</div>
+    </div>
+    <div>
+      关于
     </div>
   </div>
 </template>
