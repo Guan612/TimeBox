@@ -48,7 +48,7 @@ onMounted(() => {
 <template>
     <div class="flex bg-white">
         <div class="flex flex-grow">
-            <div class="justify-center grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4">
+            <div class="justify-center grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 items-center">
                 <div v-for="item in photoList" :key="item.id">
                     <collectionCard :collctionName="item.photoName" :imgSrc="item.photoUrl" :id="item.id"
                         :collctionDes="item.photoDes"></collectionCard>
@@ -63,7 +63,7 @@ onMounted(() => {
                 </el-timeline-item>
             </el-timeline>
         </div>
-        <el-backtop :right="80" :bottom="80" />
+        <el-backtop :right="80" :bottom="80"/>
     </div>
 </template>
 
