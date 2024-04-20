@@ -50,6 +50,7 @@ model PhotoCollectionInfo {
   photoName                    String
   photoDes                     String?
   isDel                        Boolean                        @default(false)
+  isPrivate                    Boolean                        @default(false)
   createdAt                    DateTime                       @default(dbgenerated("now()")) @db.DateTime
   updatedAt                    DateTime                       @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
   user                         User?                          @relation(fields: [userId], references: [id])
