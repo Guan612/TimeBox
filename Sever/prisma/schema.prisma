@@ -44,30 +44,40 @@ model UserHaderImg {
 
 //照片合集信息表
 model PhotoCollectionInfo {
-  id         Int          @id @default(autoincrement())
-  userId     Int
-  photoUrl   String?
-  photoName  String
-  photoDes   String?
-  isDel      Boolean      @default(false)
-  createdAt  DateTime     @default(dbgenerated("now()")) @db.DateTime
-  updatedAt  DateTime     @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
-  user       User?        @relation(fields: [userId], references: [id])
-  photoslist PhotosList[]
+  id                           Int                            @id @default(autoincrement())
+  userId                       Int
+  photoUrl                     String?
+  photoName                    String
+  photoDes                     String?
+  isDel                        Boolean                        @default(false)
+  createdAt                    DateTime                       @default(dbgenerated("now()")) @db.DateTime
+  updatedAt                    DateTime                       @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
+  user                         User?                          @relation(fields: [userId], references: [id])
+  PhotosListAndPhotoCollection PhotosListAndPhotoCollection[]
 }
 
-//照片合集表
+//照片表
 model PhotosList {
+  id             Int                            @id @default(autoincrement())
+  userId         Int
+  photoUrl       String?
+  photoShootTime String?
+  isDel          Boolean                        @default(false)
+  createdAt      DateTime                       @default(dbgenerated("now()")) @db.DateTime
+  updatedAt      DateTime                       @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
+  user           User?                          @relation(fields: [userId], references: [id])
+  photoAndColl   PhotosListAndPhotoCollection[]
+}
+
+//照片与合集关系
+model PhotosListAndPhotoCollection {
   id                Int                  @id @default(autoincrement())
-  userId            Int
   photoCollectionId Int
-  photoUrl          String?
-  photoShootTime    String?
-  isDel             Boolean              @default(false)
+  photoId           Int
   createdAt         DateTime             @default(dbgenerated("now()")) @db.DateTime
   updatedAt         DateTime             @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
-  user              User?                @relation(fields: [userId], references: [id])
-  photoci           PhotoCollectionInfo? @relation(fields: [photoCollectionId], references: [id])
+  photoCollection   PhotoCollectionInfo? @relation(fields: [photoCollectionId], references: [id])
+  photo             PhotosList?          @relation(fields: [photoId], references: [id])
 }
 
 //照片管理表
