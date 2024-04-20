@@ -19,21 +19,48 @@ class photoService {
             where: {
                 id: id
             },
-            include: {
-                photoslist: {
+            select: {
+                id: true,
+                userId: true,
+                photoUrl: true,
+                photoName: true,
+                photoDes: true,
+                photoAndColl: {
                     where: {
                         isDel: false
                     },
                     select: {
                         id: true,
-                        userId: true,
-                        photoUrl: true,
+                        photoCollectionId: true,
+                        photoId: true,
+                        photo: {
+                            where:{
+                                isDel: false
+                            },
+                            select: {
+                                id: true,
+                                photoUrl: true
+                            }
+                        }
                     }
                 }
             }
-        })
+        });
 
-        return res;
+        //map函数用于重整数组结果
+        const photos = res.photoAndColl.map(item => ({
+            photoid: item.photo.id,
+            userId: item.photo.userId,
+            photoUrl: item.photo.photoUrl
+        }));
+
+        const result = {
+            photoName: res.photoName,
+            photoDes: res.photoDes,
+            photoslist: photos,
+        };
+
+        return result;
     }
 
     //添加照片集信息
@@ -65,7 +92,7 @@ class photoService {
     async update(photoInfo) {
         const res = await prisma.photoCollectionInfo.update({
             where: {
-                id: photoInfo.id*1
+                id: photoInfo.id * 1
             },
             data: {
                 photoName: photoInfo.photoName,
