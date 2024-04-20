@@ -1,9 +1,15 @@
 <script setup>
+import { ElFormItem } from 'element-plus';
+import {ref} from 'vue';
 
 </script>
 
 <template>
-    <h1>上传照片</h1>
+    <div class="flex flex-col justify-center items-center">
+        <ElForm>
+            <ElFormItem label="图片上传" prop=""></ElFormItem>
+        </ElForm>
+    </div>
 </template>
 
 <style scoped>
