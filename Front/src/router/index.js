@@ -8,6 +8,7 @@ import searchRes from '@/views/Searchres/index.vue'
 import userCenter from '@/views/User/userCenter.vue'
 import addColle from '@/views/Photo/addColle.vue'
 import uplaodPhoto from '@/views/Photo/uplaodPhoto.vue'
+import myPhoto from '@/views/Photo/myPhoto.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +53,12 @@ const router = createRouter({
           name:'uplaodphoto',
           component:uplaodPhoto,
           meta: {title: "上传照片"},
+        },
+        {
+          path:'/myphoto',
+          name:'myphoto',
+          component:myPhoto,
+          meta: {title: "我的照片"},
         }
       ]
     },
