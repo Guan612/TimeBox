@@ -207,7 +207,7 @@ class photoService {
             id: item.id,
             photoUrl: item.photoUrl,
             // 注意这里取数组第一个元素的属性
-            photoCollectionId: item.photoAndColl[0].photoCollectionId
+            //photoCollectionId: item.photoAndColl[0].photoCollectionId
         }))
 
         return reslut;
