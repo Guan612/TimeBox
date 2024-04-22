@@ -34,3 +34,13 @@ export const uploadPhotoAPI = (data) => {
 export const searchPhotoCollectionAPI = (keyword) => {
     return http.get(`/photos/search?keyword=${keyword}`);
 }
+
+//照片集照片上传人
+export const uploaderAPI = (pCId) => {
+    return http.get(`/photos/${pCId}/owner`);
+}
+
+//查找本人照片
+export const findMyPhotoAPI = () => {
+    return http.get('/photos/myphoto');
+}

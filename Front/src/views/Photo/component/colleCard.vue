@@ -3,15 +3,18 @@ import { useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
 import {ArrowLeftBold } from '@element-plus/icons-vue'
 
-import { getPhotoCollectionAPI } from '@/apis/photo'
+import { getPhotoCollectionAPI,uploaderAPI } from '@/apis/photo'
 import { backindex } from './function'
 const { params } = useRoute();
 
 const photoCollId = ref('');
 const photoColl = ref({});
+const uploader = ref({});
 
 const getPhotoColl = async () => {
     const res = await getPhotoCollectionAPI(photoCollId.value);
+    const uploaderRes = await uploaderAPI(photoCollId.value);
+    uploader.value = uploaderRes.reslut;
     photoColl.value = res.reslut;
 }
 
@@ -24,18 +27,22 @@ onMounted(() => {
 
 <template>
     <div class="flex flex-col m-2 border-dotted border-2 rounded-2xl">
-        <div class="flex flex-row m-1">
-            <div class="justify-center items-center">
+        <div class="flex flex-row m-1 items-center">
+            <div class="">
                 <el-button round :icon="ArrowLeftBold" @click="backindex"></el-button>
             </div>
-            <div class="justify-center items-center">
-                田皮鸭
+            <div class="m-1">照片所有者</div>
+            <div class="justify-center items-center" v-for="item in uploader" :key="item.userId">
+                <div  class="flex flex-row m-1 font-bold">
+                    <p>{{item.nickname}}</p>
+                </div>
+                
             </div>
         </div>
         <div class="flex flex-row justify-center items-center w-full m-1">
             <div class="justify-center items-center w-2/3">
                 <el-carousel :interval="5000" arrow="always" height="500px" class="rounded-lg">
-                    <el-carousel-item v-for="item in photoColl.photoslist" :key="item.photoid">
+                    <el-carousel-item v-for="item in photoColl.photoslist" :key="item.id">
                         <el-image :src="item.photoUrl" class="max-w-full h-auto"/>
                     </el-carousel-item>
                 </el-carousel>
