@@ -10,7 +10,7 @@ const {
     uploadPhoto,
     findPhotoCollUser,
     showMyPhoto,
-
+    showMyPhotoColl,
 
     test
 } = require('../controller/photo.controller');
@@ -26,6 +26,9 @@ router.get('/search', auth, searchPhoto)
 
 //查找我的照片(注意路由匹配顺序)
 router.get('/myphoto', auth, showMyPhoto)
+
+//获取我的照片集列表
+router.get('/mycoll', auth, showMyPhotoColl)
 
 //获取照片合集详细信息(photo_collection_id)
 router.get('/:id', getDetailedColl)

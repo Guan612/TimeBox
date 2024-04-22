@@ -8,6 +8,7 @@ const {
     search,
     UserColl,
     UserPhoto,
+    UserCollList
 } = require('../service/photo.service')
 const { BASE_IMG_URL } = require('../config/config')
 const { unSupportedFileType, uploadFileError } = require('../constant/erro.type')
@@ -129,6 +130,17 @@ class photoController {
         ctx.body = {
             code: 0,
             msg: '我的照片显示成功',
+            reslut: res
+        }
+    }
+
+    //我的照片集
+    async showMyPhotoColl(ctx) {
+        const { id } = ctx.state.user;
+        const res = await UserCollList(id * 1);
+        ctx.body = {
+            code: 0,
+            msg: '我的照片集显示成功',
             reslut: res
         }
     }

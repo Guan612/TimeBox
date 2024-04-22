@@ -194,8 +194,8 @@ class photoService {
             select: {
                 id: true,
                 photoUrl: true,
-                photoAndColl:{
-                    select:{
+                photoAndColl: {
+                    select: {
                         photoCollectionId: true,
                         photoId: true,
                     }
@@ -211,6 +211,24 @@ class photoService {
         }))
 
         return reslut;
+    }
+
+    //查询用户创建的照片集
+    async UserCollList(userId) {
+        const res = await prisma.photoCollectionInfo.findMany({
+            where: {
+                userId: userId,
+                isDel: false
+            },
+            select: {
+                id: true,
+                photoName: true,
+                photoDes: true,
+                photoUrl: true
+            }
+        })
+
+        return res;
     }
 }
 
