@@ -9,7 +9,8 @@ import router from '@/router';
     <div class="mt-5">
       <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer"
         @click="router.push('/')">首页</div>
-      <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer">我的照片集
+      <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer"
+        @click="router.push('/myphotocoll')">我的照片集
       </div>
       <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer"
         @click="router.push('/myphoto')">我的照片</div>

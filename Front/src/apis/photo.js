@@ -44,3 +44,8 @@ export const uploaderAPI = (pCId) => {
 export const findMyPhotoAPI = () => {
     return http.get('/photos/myphoto');
 }
+
+//查找本人照片集
+export const findMyPhotoCollAPI = () => {
+    return http.get('/photos/mycoll');
+}
