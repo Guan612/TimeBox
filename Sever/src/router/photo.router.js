@@ -7,7 +7,12 @@ const {
     addPhotoColl,
     updatePhotoColl,
     delPhotoColl,
-    uploadPhoto
+    uploadPhoto,
+    findPhotoCollUser,
+    showMyPhoto,
+
+
+    test
 } = require('../controller/photo.controller');
 
 const { auth } = require('../middleware/auth.middleware');
@@ -18,6 +23,9 @@ router.get('/', getAllPhoto)
 
 //照片集搜索
 router.get('/search', auth, searchPhoto)
+
+//查找我的照片(注意路由匹配顺序)
+router.get('/myphoto', auth, showMyPhoto)
 
 //获取照片合集详细信息(photo_collection_id)
 router.get('/:id', getDetailedColl)
@@ -37,5 +45,8 @@ router.delete('/:id', auth, delPhotoColl)
 
 //照片上传
 router.post('/upload', auth, uploadPhoto)
+
+//查找照片集照片所属人
+router.get('/:id/owner', auth, findPhotoCollUser)
 
 module.exports = router;

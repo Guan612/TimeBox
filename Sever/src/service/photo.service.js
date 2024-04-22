@@ -34,12 +34,13 @@ class photoService {
                         photoCollectionId: true,
                         photoId: true,
                         photo: {
-                            where:{
+                            where: {
                                 isDel: false
                             },
                             select: {
                                 id: true,
-                                photoUrl: true
+                                photoUrl: true,
+                                userId: true,
                             }
                         }
                     }
@@ -49,8 +50,8 @@ class photoService {
 
         //map函数用于重整数组结果
         const photos = res.photoAndColl.map(item => ({
-            photoid: item.photo.id,
-            userId: item.photo.userId,
+            id: item.photo.id,
+            userid: item.photo.userId,
             photoUrl: item.photo.photoUrl
         }));
 
@@ -140,6 +141,76 @@ class photoService {
         })
 
         return res
+    }
+
+    //查找照片上传人信息
+    async UserColl(collId) {
+        const res = await prisma.photosAndPhotoColl.findMany({
+            where: {
+                photoCollectionId: collId
+            },
+            select: {
+                photo: {
+                    select: {
+                        userId: true,
+                        user: {
+                            select: {
+                                nickname: true,
+                            }
+                        }
+                    },
+                }
+            }
+        });
+
+        const pUUser = res.map(item => ({
+            userId: item.photo.userId,
+            nickname: item.photo.user.nickname
+        }))
+
+        //结果去重
+        // const uniqueResults = Array.from(new Set(photoUplaodUser.map(item => JSON.stringify(item))))
+        //     .map(item => JSON.parse(item));
+
+        //使用 map 方法对原始数组进行转换，将每个对象转换为字符串形式。这可以通过 JSON.stringify(item) 来实现，其中 item 是数组中的每个对象。
+        const stringifiedArray = pUUser.map(item => JSON.stringify(item));
+        //使用 Set 去除重复项
+        const uniqueStringSet = new Set(stringifiedArray);
+        //将 Set 转回数组形式：
+        const uniqueStringArray = Array.from(uniqueStringSet);
+        //将数组中的字符串转换回对象形式：
+        const uniqueResults = uniqueStringArray.map(item => JSON.parse(item));
+
+        return uniqueResults;
+    }
+
+    //查找本人上传照片
+    async UserPhoto(userId) {
+        const res = await prisma.photosList.findMany({
+            where: {
+                userId: userId,
+                isDel: false
+            },
+            select: {
+                id: true,
+                photoUrl: true,
+                photoAndColl:{
+                    select:{
+                        photoCollectionId: true,
+                        photoId: true,
+                    }
+                }
+            }
+        })
+
+        const reslut = res.map(item => ({
+            id: item.id,
+            photoUrl: item.photoUrl,
+            // 注意这里取数组第一个元素的属性
+            photoCollectionId: item.photoAndColl[0].photoCollectionId
+        }))
+
+        return reslut;
     }
 }
 

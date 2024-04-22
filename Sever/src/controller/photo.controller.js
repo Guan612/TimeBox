@@ -6,6 +6,8 @@ const {
     addPhoto,
     deleteCl,
     search,
+    UserColl,
+    UserPhoto,
 } = require('../service/photo.service')
 const { BASE_IMG_URL } = require('../config/config')
 const { unSupportedFileType, uploadFileError } = require('../constant/erro.type')
@@ -106,6 +108,39 @@ class photoController {
             code: 0,
             msg: '搜索照片成功',
             reslut: res
+        }
+    }
+
+    //查找照片集照片属于人
+    async findPhotoCollUser(ctx) {
+        const { id } = ctx.request.params;
+        const res = await UserColl(id * 1);
+        ctx.body = {
+            code: 0,
+            msg: '查找照片集照片属于人成功',
+            reslut: res
+        }
+    }
+
+    //我的照片显示
+    async showMyPhoto(ctx) {
+        const { id } = ctx.state.user;
+        const res = await UserPhoto(id * 1);
+        ctx.body = {
+            code: 0,
+            msg: '我的照片显示成功',
+            reslut: res
+        }
+    }
+
+
+
+
+    async test(ctx) {
+        ctx.body = {
+            code: 0,
+            msg: '测试成功',
+            reslut: 'test'
         }
     }
 }
