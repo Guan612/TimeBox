@@ -27,26 +27,6 @@ const haderImg = ref('')
 const testimg = ref('https://img2.imgtp.com/2024/04/09/OmWWam4c.jpg')
 const logoImg = ref('https://upload.wikimedia.org/wikipedia/commons/1/1a/Dolby_logo_2019.svg')
 
-const uplaod = () => {
-    if (userStore.userInfo.token) {
-        // 跳转到上传页面
-        router.push('/uplaodphoto')
-    } else {
-        // 跳转到登录页面
-        router.push('/login')
-    }
-}
-
-const add = () => {
-    if (userStore.userInfo.token) {
-        // 跳转到上传页面
-        router.push('/addcolle')
-    } else {
-        // 跳转到登录页面
-        router.push('/login')
-    }
-}
-
 </script>
 
 <template>
@@ -67,16 +47,16 @@ const add = () => {
             </div>
             <div class="flex flex-row basis-2/3 justify-end" v-if="userStore.userInfo.token">
                 <div class="content-center hidden md:block md:m-5">
-                    <ElButton :icon="Upload" round @click="uplaod">上传照片</ElButton>
+                    <ElButton :icon="Upload" round @click="router.push('/uplaodphoto')">上传照片</ElButton>
                 </div>
                 <div class="content-center block md:hidden md:mr-20">
-                    <ElButton :icon="Upload" circle type="primary" @click="uplaod"></ElButton>
+                    <ElButton :icon="Upload" circle type="primary" @click="router.push('/uplaodphoto')"></ElButton>
                 </div>
                 <div class="content-center hidden md:block md:mr-5">
-                    <ElButton :icon="Edit" round @click="add">添加合集</ElButton>
+                    <ElButton :icon="Edit" round @click="router.push('/addcolle')">添加合集</ElButton>
                 </div>
                 <div class="content-center block md:hidden md:mr-20">
-                    <ElButton class="ml-2" :icon="Edit" circle type="primary" @click="add">
+                    <ElButton class="ml-2" :icon="Edit" circle type="primary" @click="router.push('/addcolle')">
                     </ElButton>
                 </div>
                 <RouterLink to="/user" class="content-center m-3 md:m-5" style="text-decoration: none; color: white;">
