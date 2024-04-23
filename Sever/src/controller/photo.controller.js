@@ -101,32 +101,36 @@ class photoController {
     //     }
     // }
 
-    //多文件上传测试
+    //单/多文件上传测试
     async uploadPhoto(ctx) {
         const files = ctx.request.files.files;
         const { photoCollectionId } = ctx.request.body;
         const { id } = ctx.state.user;
         const fileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     
-        if (!files || !Array.isArray(files)) {
-            return ctx.app.emit('error', uploadFileError, ctx);
-        }
+        // if (!files) {
+        //     return ctx.app.emit('error', uploadFileError, ctx);
+        // }
+    
+        // 处理单文件上传情况
+        let fileArray = Array.isArray(files) ? files : [files];
     
         const photoInfos = [];
     
-        for (const file of files) {
+        for (const file of fileArray) {
             const { mimetype, filename, path, size } = file;
     
-            if (!fileTypes.includes(mimetype)) {
-                return ctx.app.emit('error', unSupportedFileType, ctx);
-            }
+            // if (!fileTypes.includes(mimetype)) {
+            //     return ctx.app.emit('error', unSupportedFileType, ctx);
+            // }
     
             const fileSize = (size / 1024 / 1024).toFixed(2);
     
             const photoInfo = {
-                userId:id,
-                //photoCollectionId,
-                photoUrl: BASE_IMG_URL + filename,
+                id,
+                photoCollectionId,
+                filepath: BASE_IMG_URL + filename,
+                filename,
                 fileSize: `${fileSize} MB`
             };
     
