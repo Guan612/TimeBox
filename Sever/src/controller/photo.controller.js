@@ -72,33 +72,79 @@ class photoController {
     }
 
     //上传照片
+    // async uploadPhoto(ctx) {
+    //     const { file, path } = ctx.request.files;
+    //     let fileSize = file.size / 1024 / 1024;
+    //     fileSize = fileSize.toFixed(2);
+
+    //     const fileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
+    //     if (file) {
+    //         if (!fileTypes.includes(file.mimetype)) {
+    //             return ctx.app.emit('error', unSupportedFileType, ctx);
+    //         }
+    //         //将path写入数据库
+    //         const { id } = ctx.state.user
+    //         const { photoCollectionId } = ctx.request.body
+    //         const filepath = BASE_IMG_URL + file.newFilename
+    //         const res = await addPhoto({ id, photoCollectionId, filepath })
+    //         ctx.body = {
+    //             code: 0,
+    //             Message: '图片上传成功',
+    //             result: {
+    //                 photo_name: file.newFilename,
+    //                 photo_size: fileSize + "MB",
+    //             }
+    //         }
+
+    //     } else {
+    //         return ctx.app.emit('error', uploadFileError, ctx);
+    //     }
+    // }
+
+    //多文件上传测试
     async uploadPhoto(ctx) {
-        const { file, path } = ctx.request.files;
-        let fileSize = file.size / 1024 / 1024;
-        fileSize = fileSize.toFixed(2);
-
-        const fileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
-        if (file) {
-            if (!fileTypes.includes(file.mimetype)) {
-                return ctx.app.emit('error', unSupportedFileType, ctx);
-            }
-            //将path写入数据库
-            const { id } = ctx.state.user
-            const { photoCollectionId } = ctx.request.body
-            const filepath = BASE_IMG_URL + file.newFilename
-            const res = await addPhoto({ id, photoCollectionId, filepath })
-            ctx.body = {
-                code: 0,
-                Message: '图片上传成功',
-                result: {
-                    photo_name: file.newFilename,
-                    photo_size: fileSize + "MB",
-                }
-            }
-
-        } else {
+        const files = ctx.request.files.files;
+        const { photoCollectionId } = ctx.request.body;
+        const { id } = ctx.state.user;
+        const fileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    
+        if (!files || !Array.isArray(files)) {
             return ctx.app.emit('error', uploadFileError, ctx);
         }
+    
+        const photoInfos = [];
+    
+        for (const file of files) {
+            const { mimetype, filename, path, size } = file;
+    
+            if (!fileTypes.includes(mimetype)) {
+                return ctx.app.emit('error', unSupportedFileType, ctx);
+            }
+    
+            const fileSize = (size / 1024 / 1024).toFixed(2);
+    
+            const photoInfo = {
+                userId:id,
+                //photoCollectionId,
+                photoUrl: BASE_IMG_URL + filename,
+                fileSize: `${fileSize} MB`
+            };
+    
+            photoInfos.push(photoInfo);
+        }
+    
+        // 将所有文件信息插入数据库
+        const insertPromises = photoInfos.map(photoInfo => addPhoto(photoInfo));
+        await Promise.all(insertPromises);
+    
+        ctx.body = {
+            code: 0,
+            message: '图片上传成功',
+            result: photoInfos.map(photoInfo => ({
+                photo_name: photoInfo.filename,
+                photo_size: photoInfo.fileSize
+            }))
+        };
     }
 
     //照片搜索
