@@ -128,7 +128,7 @@ class photoService {
             data: {
                 userId: photoInfo.id,
                 photoUrl: photoInfo.filepath,
-                photoCollectionId: photoInfo.photoCollectionId * 1,
+                //photoCollectionId: photoInfo.photoCollectionId * 1,
             }
         })
         return res
