@@ -18,7 +18,7 @@ export const useUserStore = defineStore(
 
         //退出登录
         const logout = () => {
-         userInfo.value = {}
+         userInfo.value = null
         }
         return { userInfo, getuserInfo,logout }
     },

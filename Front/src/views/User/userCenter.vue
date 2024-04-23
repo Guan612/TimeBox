@@ -3,6 +3,8 @@ import {ref} from 'vue'
 import { useUserStore } from '@/stores/userStore';
 import { useUserHanderImgStore } from '@/stores/userHaderImgStore';
 import { ElButton } from 'element-plus';
+
+import router from '@/router';
 const userStore = useUserStore();
 const userHanderImgStore = useUserHanderImgStore();
 
@@ -15,6 +17,7 @@ const loginid = ref('');
 const logout = () =>{
     userStore.logout();
     userHanderImgStore.logoutImg();
+    router.push('/')
 }
 
 //上传头像组件
