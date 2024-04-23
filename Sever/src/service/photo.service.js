@@ -111,8 +111,13 @@ class photoService {
                 photoName: {
                     contains: keyword
                 },
-                isDel: false
-            }
+                isDel: false,
+            },
+            // select:{
+            //     photoName: true,
+            //     photoDes: true,
+            //     photoUrl: true,
+            // }
         })
         return res;
     }

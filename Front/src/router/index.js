@@ -58,9 +58,9 @@ const router = createRouter({
           meta: { title: "上传照片", requiresAuth: true },
         },
         {
-          path:'/myphotocoll',
-          name:'myphotocoll',
-          component:myColle,
+          path: '/myphotocoll',
+          name: 'myphotocoll',
+          component: myColle,
           meta: { title: "我的照片合集", requiresAuth: true },
 
         },
