@@ -43,7 +43,7 @@ onMounted(() => {
             <div class="justify-center items-center w-2/3">
                 <el-carousel :interval="5000" arrow="always" height="500px" class="rounded-lg">
                     <el-carousel-item v-for="item in photoColl.photoslist" :key="item.id">
-                        <el-image :src="item.photoUrl" class="max-w-full h-auto"/>
+                        <el-image :src="item.photoUrl" :preview-src-list="[item.photoUrl]" class="max-w-full h-auto"/>
                     </el-carousel-item>
                 </el-carousel>
             </div>
