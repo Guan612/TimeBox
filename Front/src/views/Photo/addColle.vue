@@ -59,7 +59,10 @@ onMounted(() => {
                     <el-form-item label="从已经上传的照片选择" class="m-2 basis-1/2">
                         <el-select v-model="collinfo.photoUrl" placeholder="请选择">
                             <el-option v-for="item in options" :key="item.id" :label="item.label" :value="item.value">
-                                <el-image :src="item.photoUrl"></el-image>
+                                <div class="flex flex-col">
+                                    <el-image :src="item.photoUrl" style="height: 500px;"></el-image>
+                                </div>
+                                
                             </el-option>
                         </el-select>
                         <el-button type="primary" @click="">选择</el-button>
