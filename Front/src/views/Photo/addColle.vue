@@ -29,7 +29,7 @@ onMounted(() => {
 
 <template>
     <div class="flex flex-col m-5">
-        <div>上传区域</div>
+        <div>创建合集</div>
         <ElForm v-model="collinfo" label-position="top">
             <ElFormItem label="相册集名称">
                 <ElInput v-model="collinfo.photoname" maxlength="20" show-word-limit clearable />
@@ -62,7 +62,7 @@ onMounted(() => {
                                 <div class="flex flex-col">
                                     <el-image :src="item.photoUrl" style="height: 500px;"></el-image>
                                 </div>
-                                
+
                             </el-option>
                         </el-select>
                         <el-button type="primary" @click="">选择</el-button>
