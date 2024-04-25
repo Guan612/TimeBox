@@ -1,8 +1,7 @@
 <script setup>
 import { findMyPhotoAPI } from '@/apis/photo'
-import { ElImage } from 'element-plus';
 import { onMounted, ref } from 'vue';
-
+import { Edit, Delete, Plus } from '@element-plus/icons-vue'
 const photos = ref([])
 const getMyPhoto = async () => {
     const res = await findMyPhotoAPI()
@@ -19,8 +18,31 @@ onMounted(() => {
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <!-- 使用 v-for 循环渲染图片 -->
             <div v-for="photo in photos" :key="photo.id" class="flex justify-center">
-                <el-image :src="photo.photoUrl" fit="cover" style="height: 200px;"
-                    class="rounded-lg shadow-lg cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out"></el-image>
+                <el-popover placement="bottom" :width="300" trigger="click" :content="selct">
+                    <template #reference>
+                        <el-image :src="photo.photoUrl" fit="cover" style="height: 200px;"
+                            class="rounded-lg shadow-lg cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out"></el-image>
+                        <!-- <el-button class="m-2">Click to activate</el-button> -->
+                    </template>
+                    <div class="flex flex-col">
+                        <div class="felx flex-row justify-center m-2">
+                            <el-button :icon="Plus" round></el-button>
+                            <el-button :icon="Edit" round type="primary"></el-button>
+                            <el-button :icon="Delete" type="danger" round></el-button>
+                        </div>
+                        <div class="m-2">
+                            <div v-if="photo.photoAndColl.length > 0">
+                                所属合集：{{ photo.photoAndColl[0].photoCollection.photoName }}
+                            </div>
+                            <div v-else>
+                                未加入任何相册
+                            </div>
+                        </div>
+                    </div>
+
+                </el-popover>
+
+
             </div>
         </div>
     </div>
