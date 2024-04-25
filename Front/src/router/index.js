@@ -12,6 +12,7 @@ import addColle from '@/views/Photo/addColle.vue'
 import uplaodPhoto from '@/views/Photo/uplaodPhoto.vue'
 import myColle from '@/views/Photo/myPhotoColl.vue'
 import myPhoto from '@/views/Photo/myPhoto.vue'
+import updateColl from '@/views/Photo/updateColl.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -69,6 +70,12 @@ const router = createRouter({
           name: 'myphoto',
           component: myPhoto,
           meta: { title: "我的照片", requiresAuth: true },
+        },
+        {
+          path: '/updatecoll/:id',
+          name: 'updatecoll',
+          component: updateColl,
+          meta: { title: "修改合集", requiresAuth: true },
         }
       ]
     },
