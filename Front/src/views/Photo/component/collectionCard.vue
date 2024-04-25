@@ -1,6 +1,7 @@
 <script setup>
 import { MoreFilled, Edit, Share } from '@element-plus/icons-vue'
 import router from '@/router';
+import {toupdatecoll} from './function'
 
 const props = defineProps({
     id: Number,
@@ -13,6 +14,11 @@ const props = defineProps({
 const tocoll = (id) => {
     router.push(`/colle/${id}`)
 }
+
+//更新
+const toupdate = (id) => {
+    toupdatecoll(id)
+}
 </script>
 
 <template>
@@ -23,7 +29,7 @@ const tocoll = (id) => {
         <p>{{ collctionDes }}</p>
         <div class="flex flex-row">
             <el-button class="mt-2" round :icon="MoreFilled" @click="tocoll(id)"></el-button>
-            <el-button class="mt-2" round :icon="Edit"></el-button>
+            <el-button class="mt-2" round :icon="Edit" @click="toupdate(id)"></el-button>
             <el-button class="mt-2" round :icon="Share"></el-button>
         </div>
     </el-card>
