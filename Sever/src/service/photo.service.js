@@ -202,20 +202,25 @@ class photoService {
                 photoAndColl: {
                     select: {
                         photoCollectionId: true,
-                        photoId: true,
+                        photoCollection: {
+                            select: {
+                                photoName: true,
+                                photoDes: true,
+                            }
+                        }
                     }
                 }
             }
         })
 
-        const reslut = res.map(item => ({
-            id: item.id,
-            photoUrl: item.photoUrl,
-            // 注意这里取数组第一个元素的属性
-            //photoCollectionId: item.photoAndColl[0].photoCollectionId
-        }))
+        // const reslut = res.map(item => ({
+        //     id: item.id,
+        //     photoUrl: item.photoUrl,
+        //     // 注意这里取数组第一个元素的属性
+        //     //photoCollectionId: item.photoAndColl[0].photoCollectionId
+        // }))
 
-        return reslut;
+        return res;
     }
 
     //查询用户创建的照片集
