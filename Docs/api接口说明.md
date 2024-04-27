@@ -253,7 +253,6 @@ url：/
 | photo_name | string | 是 | 照片名称 |
 | photo_url | string | 是 | 照片url |
 | photo_desc | string | 否 | 照片描述 |
-| isdelete | boolean | 否 | 是否删除 |
 
 返回示例    
 
@@ -267,7 +266,7 @@ url：/
 
 ### 2.4 修改照片合集信息
 方法：PUT
-url：/:photo_id
+url：/:photocoll_id
 参数：
 
 | 参数名 | 类型 | 是否必须 | 说明 |
@@ -292,7 +291,7 @@ url：/:photo_id
 
 ### 2.5 删除照片合集
 方法：DELETE
-url：/:photo_id
+url：/:photocoll_id
 参数：
 
 | 参数名 | 类型 | 是否必须 | 说明 |
@@ -314,11 +313,9 @@ url：/uploads
 参数：
 
 | 参数名 | 类型 | 是否必须 | 说明 |
-| :----: | :----: | :----: | :----: |    
-| photo_collection_id | int | 是 | 照片合集id |
-| photo_name | string | 否 | 照片名称 |
+| :----: | :----: | :----: | :----: |
+| userid | int | 是 | 用户id |
 | photo_url | string | 否 | 照片url |
-| photo_desc | string | 否 | 照片描述 |
 | photo_shoot_time | string | 否 | 照片拍摄时间 |
 
 返回示例
@@ -328,4 +325,96 @@ url：/uploads
         "msg": "添加照片成功",
         "reslut": ""
     }
+```
+
+### 2.7 搜索合集
+方法：Get
+url：/search
+参数：
+
+| 参数名 | 类型 | 是否必须 | 说明 |
+| :----: | :----: | :----: | :----: |
+| keyword | string | 是 | 搜索关键词 |
+
+返回示例
+```json
+    {
+        "code": 0,
+        "msg": "搜索照片成功",
+        "reslut": [
+            {
+                "id": 1,
+                "userId": 1,
+                "photoUrl": "http://127.0.0.1:8000/img/xintie.png",
+                "photoName": "崩坏：星穹铁道",
+                "photoDes": "这是星铁照片的合集",
+            }
+        ]
+    }
+```
+
+### 2.8 获取照片集照片用户信息
+方法：Get
+url：/:photocoll_id/owner
+参数：
+
+| 参数名 | 类型 | 是否必须 | 说明 |
+| :----: | :----: | :----: | :----: |
+| photo_id | int | 是 | 照片id |
+
+返回示例
+```json
+    {
+        "code": 0,
+        "msg": "查找照片集照片属于人成功",
+        "reslut": [
+            {
+                "userId": 2,
+                "nickname": "canary"
+            },
+            {
+                "userId": 1,
+                "nickname": "田皮鸭"
+            }
+        ]
+    }
+```
+
+### 2.9 获取用户照片列表
+方法：Get
+url：/myphoto
+参数：
+
+| 参数名 | 类型 | 是否必须 | 说明 |
+| :----: | :----: | :----: | :----: |
+| user_id | int | 是 | 用户id |
+| page | int | 否 | 页码 |
+| page_size | int | 否 | 每页数量 |
+
+返回示例
+```json
+{
+    "code": 0,
+    "msg": "我的照片显示成功",
+    "reslut": [
+        {
+            "id": 1,
+            "photoUrl": "http://127.0.0.1:8000/img/huahuo1.png",
+            "photoAndColl": [
+                {
+                    "photoCollectionId": 1,
+                    "photoCollection": {
+                        "photoName": "崩坏：星穹铁道",
+                        "photoDes": "这是星铁照片的合集"
+                    }
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "photoUrl": "http://127.0.0.1:8000/img/665.png",
+            "photoAndColl": []
+        }
+    ]
+}
 ```
