@@ -17,7 +17,8 @@ class photoService {
     async getDetailed(id) {
         const res = await prisma.photoCollectionInfo.findUnique({
             where: {
-                id: id
+                id: id,
+                isDel: false
             },
             select: {
                 id: true,
@@ -48,8 +49,10 @@ class photoService {
             }
         });
 
-        //map函数用于重整数组结果
-        const photos = res.photoAndColl.map(item => ({
+        //console.log(res);
+
+        //map函数用于重整数组结果,filter排除photos是null的情况
+        const photos = res.photoAndColl.filter(item => item.photo !== null).map(item => ({
             id: item.photo.id,
             userid: item.photo.userId,
             photoUrl: item.photo.photoUrl
@@ -115,7 +118,7 @@ class photoService {
 
         return res;
     }
-    
+
     //删除照片集里的照片
     async deleteClPhoto(photoId) {
         const res = await prisma.photosAndPhotoColl.update({
