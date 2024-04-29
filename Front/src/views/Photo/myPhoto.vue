@@ -1,5 +1,5 @@
 <script setup>
-import { findMyPhotoAPI,deletePhotoAPI } from '@/apis/photo'
+import { findMyPhotoAPI, deletePhotoAPI } from '@/apis/photo'
 import { onMounted, ref } from 'vue';
 import { Edit, Delete, Plus } from '@element-plus/icons-vue'
 const photos = ref([])
@@ -10,10 +10,13 @@ const getMyPhoto = async () => {
 
 const delphoto = async (id) => {
     const res = await deletePhotoAPI(id)
-    // if (res.code == 200) {
-        
-    // }
-    getMyPhoto()
+    if (res.code == 0) {
+        ElMessage({
+            message: '删除成功',
+            type: 'success',
+        })
+        getMyPhoto()
+    }
 }
 
 onMounted(() => {
@@ -28,7 +31,7 @@ onMounted(() => {
             <div v-for="photo in photos" :key="photo.id" class="flex justify-center">
                 <el-popover placement="bottom" :width="280" trigger="click">
                     <template #reference>
-                        <el-image :src="photo.photoUrl" fit="cover" style="height: 200px;"
+                        <el-image :src="photo.photoUrl" fit="cover" style="height: 200px;" lazy
                             class="rounded-lg shadow-lg cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out"></el-image>
                         <!-- <el-button class="m-2">Click to activate</el-button> -->
                     </template>

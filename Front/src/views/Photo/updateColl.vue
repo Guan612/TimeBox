@@ -10,23 +10,23 @@ import { updatePhotoCollectionAPI, getPhotoCollectionAPI, deletePhotoCollectionP
 
 const { params } = useRoute();
 const collinfo = ref({})
-const delinfo = ref({
-    //photoId:collinfo.photo.id
-})
+
 
 const backindex = () => {
     //使用back方法返回上一级
     router.back();
 }
 
-const delClphoto = async (delinfo) => {
-    let { reslut } = await deletePhotoCollectionPhotoAPI(delinfo)
-    if (reslut.code == 200) {
+const delClphoto = async (id) => {
+    let res = await deletePhotoCollectionPhotoAPI(id)
+    if (res.code == 0) {
         ElMessage({
             message: '删除成功',
             type: 'success',
         })
-        collinfo.value.photoslist = collinfo.value.photoslist.filter(item => item.id != delinfo.id)
+
+        //使用filter整理数组
+        collinfo.value.photoslist = collinfo.value.photoslist.filter(item => item.id != id)
     }
 }
 
@@ -59,7 +59,7 @@ onMounted(async () => {
                                 fit="cover">
                             </ElImage>
                         </template>
-                        <ElButton type="danger" round :icon="Delete" @click="delClphoto(delinfo)"></ElButton>
+                        <ElButton type="danger" round :icon="Delete" @click="delClphoto(photo.id)"></ElButton>
                     </el-popover>
 
                 </div>
