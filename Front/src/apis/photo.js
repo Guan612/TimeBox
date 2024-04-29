@@ -25,6 +25,11 @@ export const deletePhotoCollectionAPI = (pCId) => {
     return http.delete(`/photos/${pCId}`);
 }
 
+//删除照片集照片
+export const deletePhotoCollectionPhotoAPI = (delphoto) => {
+    return http.delete(`/photos/clphoto/`);
+}
+
 //上传照片
 export const uploadPhotoAPI = (data) => {
     return http.post("/photos/upload", data);
