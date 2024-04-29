@@ -30,6 +30,11 @@ export const uploadPhotoAPI = (data) => {
     return http.post("/photos/upload", data);
 }
 
+//删除照片
+export const deletePhotoAPI = (pId) => {
+    return http.delete(`/photos/photo/${pId}`);
+}
+
 //搜索照片集
 export const searchPhotoCollectionAPI = (keyword) => {
     return http.get(`/photos/search?keyword=${keyword}`);

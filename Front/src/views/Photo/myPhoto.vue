@@ -1,11 +1,19 @@
 <script setup>
-import { findMyPhotoAPI } from '@/apis/photo'
+import { findMyPhotoAPI,deletePhotoAPI } from '@/apis/photo'
 import { onMounted, ref } from 'vue';
 import { Edit, Delete, Plus } from '@element-plus/icons-vue'
 const photos = ref([])
 const getMyPhoto = async () => {
     const res = await findMyPhotoAPI()
     photos.value = res.reslut
+}
+
+const delphoto = async (id) => {
+    const res = await deletePhotoAPI(id)
+    // if (res.code == 200) {
+        
+    // }
+    getMyPhoto()
 }
 
 onMounted(() => {
@@ -28,7 +36,7 @@ onMounted(() => {
                         <div class="felx flex-row justify-center m-2">
                             <el-button :icon="Plus" round></el-button>
                             <el-button :icon="Edit" round type="primary"></el-button>
-                            <el-button :icon="Delete" type="danger" round></el-button>
+                            <el-button :icon="Delete" type="danger" round @click="delphoto(photo.id)"></el-button>
                         </div>
                         <div class="m-2">
                             <div v-if="photo.photoAndColl.length > 0">
