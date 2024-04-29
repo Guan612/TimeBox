@@ -11,8 +11,10 @@ const {
     findPhotoCollUser,
     showMyPhoto,
     showMyPhotoColl,
+    delPhotoCollPhoto,
+    delPhoto,
 
-    test
+    test,
 } = require('../controller/photo.controller');
 
 const { auth } = require('../middleware/auth.middleware');
@@ -43,8 +45,14 @@ router.post('/', auth, photoValidator({
 //修改照片合集信息
 router.put('/:id', auth, updatePhotoColl)
 
+//删除照片集里面的照片
+router.delete('/clphoto/:id', auth, delPhotoCollPhoto)
+
 //删除照片合集
 router.delete('/:id', auth, delPhotoColl)
+
+//删除照片
+router.delete('/photo/:id', auth, delPhoto)
 
 //照片上传
 router.post('/upload', auth, uploadPhoto)

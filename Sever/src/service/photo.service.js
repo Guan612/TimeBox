@@ -103,6 +103,24 @@ class photoService {
 
         return res;
     }
+    
+    //删除照片集里的照片
+    async deleteClPhoto(photoId) {
+        const res = await prisma.photosAndPhotoColl.update({
+            where: {
+                id: photoId
+            },
+            data: {
+                isDel: true
+            },
+            select: {
+                photoId: true,
+                photoCollectionId: true,
+            }
+        })
+
+        return res;
+    }
 
     //搜索照片合集
     async search(keyword) {

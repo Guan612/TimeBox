@@ -5,16 +5,18 @@ const {
     update,
     addPhoto,
     deleteCl,
+    deletePhoto,
+    deleteClPhoto,
     search,
     UserColl,
     UserPhoto,
-    UserCollList
+    UserCollList,
 } = require('../service/photo.service')
 const { BASE_IMG_URL } = require('../config/config')
 const { unSupportedFileType, uploadFileError } = require('../constant/erro.type')
 
 class photoController {
-    //获取所有照片
+    //获取所有照片集
     async getAllPhoto(ctx) {
         const { page, limit } = ctx.request.query;
         const res = await getAll({ page, limit });
@@ -60,7 +62,7 @@ class photoController {
         }
     }
 
-    //删除照片信息
+    //删除照片集信息
     async delPhotoColl(ctx) {
         const { id } = ctx.request.params;
         const res = await deleteCl(id * 1);
@@ -71,35 +73,32 @@ class photoController {
         }
     }
 
-    //上传照片
-    // async uploadPhoto(ctx) {
-    //     const { file, path } = ctx.request.files;
-    //     let fileSize = file.size / 1024 / 1024;
-    //     fileSize = fileSize.toFixed(2);
+    //删除照片集里面的照片
+    async delPhotoCollPhoto(ctx) {
+        const { id } = ctx.request.params;
+        const res = await deleteClPhoto(id * 1);
+        ctx.body = {
+            code: 0,
+            msg: '删除照片集里面的照片成功',
+            reslut: res
+        }
+    }
 
-    //     const fileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
-    //     if (file) {
-    //         if (!fileTypes.includes(file.mimetype)) {
-    //             return ctx.app.emit('error', unSupportedFileType, ctx);
-    //         }
-    //         //将path写入数据库
-    //         const { id } = ctx.state.user
-    //         const { photoCollectionId } = ctx.request.body
-    //         const filepath = BASE_IMG_URL + file.newFilename
-    //         const res = await addPhoto({ id, photoCollectionId, filepath })
-    //         ctx.body = {
-    //             code: 0,
-    //             Message: '图片上传成功',
-    //             result: {
-    //                 photo_name: file.newFilename,
-    //                 photo_size: fileSize + "MB",
-    //             }
-    //         }
+    //删除照片
+    async delPhoto(ctx) {
+        const { id } = ctx.request.params;
+        const res = await deletePhoto(id * 1);
+        ctx.body = {
+            code: 0,
+            msg: '删除照片成功',
+            reslut: {
+                id:res.id,
+                isDel:res.isDel
+            }
+        }
+    }
 
-    //     } else {
-    //         return ctx.app.emit('error', uploadFileError, ctx);
-    //     }
-    // }
+    
 
     //单/多文件上传测试
     async uploadPhoto(ctx) {
@@ -202,6 +201,35 @@ class photoController {
 
 
 
+    //上传照片
+    // async uploadPhoto(ctx) {
+    //     const { file, path } = ctx.request.files;
+    //     let fileSize = file.size / 1024 / 1024;
+    //     fileSize = fileSize.toFixed(2);
+
+    //     const fileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']
+    //     if (file) {
+    //         if (!fileTypes.includes(file.mimetype)) {
+    //             return ctx.app.emit('error', unSupportedFileType, ctx);
+    //         }
+    //         //将path写入数据库
+    //         const { id } = ctx.state.user
+    //         const { photoCollectionId } = ctx.request.body
+    //         const filepath = BASE_IMG_URL + file.newFilename
+    //         const res = await addPhoto({ id, photoCollectionId, filepath })
+    //         ctx.body = {
+    //             code: 0,
+    //             Message: '图片上传成功',
+    //             result: {
+    //                 photo_name: file.newFilename,
+    //                 photo_size: fileSize + "MB",
+    //             }
+    //         }
+
+    //     } else {
+    //         return ctx.app.emit('error', uploadFileError, ctx);
+    //     }
+    // }
 
     async test(ctx) {
         ctx.body = {
