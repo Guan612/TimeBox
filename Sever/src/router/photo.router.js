@@ -5,6 +5,7 @@ const {
     searchPhoto,
     getDetailedColl,
     addPhotoColl,
+    addPhotoCollPhoto,
     updatePhotoColl,
     delPhotoColl,
     uploadPhoto,
@@ -44,6 +45,9 @@ router.post('/', auth, photoValidator({
 
 //修改照片合集信息
 router.put('/:id', auth, updatePhotoColl)
+
+//添加照片集照片
+router.post('/clphoto', auth, addPhotoCollPhoto)
 
 //删除照片集里面的照片
 router.delete('/clphoto/:id', auth, delPhotoCollPhoto)

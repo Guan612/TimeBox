@@ -4,6 +4,7 @@ const {
     add,
     update,
     addPhoto,
+    addPhotoToCl,
     deleteCl,
     deletePhoto,
     deleteClPhoto,
@@ -70,6 +71,19 @@ class photoController {
             code: 0,
             msg: '删除照片信息成功',
             reslut: res
+        }
+    }
+    //添加照片集里面的照片
+    async addPhotoCollPhoto(ctx) {
+        const { photoId, photoCollectionId } = ctx.request.body;
+        const res = await addPhotoToCl({ photoId, photoCollectionId });
+        ctx.body = {
+            code: 0,
+            msg: '添加照片集里面的照片成功',
+            reslut: {
+                photoId:res.photoId,
+                photoCollectionId:res.photoCollectionId
+            }
         }
     }
 

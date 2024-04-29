@@ -103,6 +103,18 @@ class photoService {
 
         return res;
     }
+
+    //添加照片到照片集
+    async addPhotoToCl(photoInfo) {
+        const res = await prisma.photosAndPhotoColl.create({
+            data: {
+                photoId: photoInfo.photoId * 1,
+                photoCollectionId: photoInfo.photoCollectionId * 1,
+            }
+        })
+
+        return res;
+    }
     
     //删除照片集里的照片
     async deleteClPhoto(photoId) {
