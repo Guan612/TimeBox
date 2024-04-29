@@ -103,49 +103,54 @@ class photoController {
 
     //单/多文件上传测试
     async uploadPhoto(ctx) {
-        const files = ctx.request.files.files;
+        const files = ctx.request.files.file;
+        //console.log(files);
         const { photoCollectionId } = ctx.request.body;
         const { id } = ctx.state.user;
         const fileTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-    
+
         if (!files) {
             return ctx.app.emit('error', uploadFileError, ctx);
         }
-    
+
         // 处理单文件上传情况
         let fileArray = Array.isArray(files) ? files : [files];
-    
+
         const photoInfos = [];
-    
+
         for (const file of fileArray) {
-            const { mimetype, filename, path, size } = file;
-    
+            //console.log(file);
+            const { mimetype, newFilename, originalFilename, path, size } = file;
+
             if (!fileTypes.includes(mimetype)) {
                 return ctx.app.emit('error', unSupportedFileType, ctx);
             }
-    
+
             const fileSize = (size / 1024 / 1024).toFixed(2);
-    
+
             const photoInfo = {
                 id,
-                photoCollectionId,
-                filepath: BASE_IMG_URL + filename,
-                filename,
+                filepath: BASE_IMG_URL + newFilename,
+                originalFilename,
                 fileSize: `${fileSize} MB`
             };
-    
+
             photoInfos.push(photoInfo);
         }
-    
+
         // 将所有文件信息插入数据库
+        //console.log(photoInfos);
         const insertPromises = photoInfos.map(photoInfo => addPhoto(photoInfo));
+
+        //确保所有文件信息都插入数据库后再返回响应
         await Promise.all(insertPromises);
-    
+        //console.log(insertPromises)
+
         ctx.body = {
             code: 0,
             message: '图片上传成功',
             result: photoInfos.map(photoInfo => ({
-                photo_name: photoInfo.filename,
+                photo_name: photoInfo.originalFilename,
                 photo_size: photoInfo.fileSize
             }))
         };
