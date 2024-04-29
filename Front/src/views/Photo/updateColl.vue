@@ -1,13 +1,20 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useRoute } from 'vue-router'
-import { Delete } from '@element-plus/icons-vue'
+import { Delete,ArrowLeftBold } from '@element-plus/icons-vue'
+import router from "@/router";
+
 
 import { updatePhotoCollectionAPI, getPhotoCollectionAPI } from "@/apis/photo"
 
 
 const { params } = useRoute();
 const collinfo = ref({})
+
+const backindex = () => {
+    //使用back方法返回上一级
+    router.back();
+}
 
 onMounted(async () => {
     let { reslut } = await getPhotoCollectionAPI(params.id)
@@ -18,7 +25,9 @@ onMounted(async () => {
 </script>
 
 <template>
-    <h5>修改相册合集信息</h5>
+    <div class="m-2">
+        <el-button @click="backindex" :icon="ArrowLeftBold" round></el-button>
+    </div>
     <div class="flex flex-col m-5">
         <el-form :model="collinfo" label-position="top">
             <ElFormItem label="相册集名称">

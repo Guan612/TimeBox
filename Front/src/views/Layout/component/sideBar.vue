@@ -5,7 +5,7 @@ import router from '@/router';
 </script>
 
 <template>
-  <div class="flex flex-col bg-transblue h-screen">
+  <div class="flex flex-col bg-transblue h-screen justify-between">
     <div class="mt-5">
       <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer"
         @click="router.push('/')">首页</div>
@@ -14,11 +14,13 @@ import router from '@/router';
       </div>
       <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer"
         @click="router.push('/myphoto')">我的照片</div>
-      <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer">最爱精选
+      <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer">
+        最爱精选
       </div>
     </div>
-    <div>
-      关于
+    <div class="self-end mt-auto">
+      <div class="m-5 p-3 bg-transblue rounded-xl hover:bg-transpink transition-all duration-300 cursor-pointer"
+        @click="router.push('/about')">关于</div>
     </div>
   </div>
 </template>
