@@ -32,7 +32,7 @@ export const deletePhotoCollectionPhotoAPI = (pId) => {
 
 //上传照片
 export const uploadPhotoAPI = (data) => {
-    return http.post("/photos/upload",{
+    return http.post("/photos/upload", {
         body: data,
         Headers: {
             'Content-Type': 'multipart/form-data'
