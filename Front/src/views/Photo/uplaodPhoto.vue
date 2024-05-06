@@ -17,14 +17,19 @@ const handlePictureCardPreview = (uploadFile) => {
 }
 
 const submit = async () => {
-    console.log(fileList.value)
+    //console.log(fileList.value)
     const data = new FormData();
     fileList.value.forEach(file => {
         data.append('files', file.raw);
     });
     // 添加调试信息
-    console.log("FormData对象中的文件数量:", data.getAll('files').length);
-    
+    // console.log(data)
+    // console.log("FormData对象中的文件数量:", data.getAll('files').length);
+    // console.log("FormData对象中的文件:", data.getAll('files'));
+    // 添加其他参数
+    //data.append('param1', 'value1');
+    //data.append('param2', 'value2');
+
     const res = await uploadPhotoAPI(data);
     console.log(res)
 }
