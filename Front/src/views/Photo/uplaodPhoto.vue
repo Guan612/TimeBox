@@ -32,6 +32,19 @@ const submit = async () => {
 
     const res = await uploadPhotoAPI(data);
     console.log(res)
+    if(res.code === 0){
+        ElMessage({
+            message: '上传成功',
+            type: 'success',
+        })
+
+        fileList.value = [];
+    } else {
+        ElMessage({
+            message: '上传失败',
+            type: 'error',
+        })
+    }
 }
 
 </script>
