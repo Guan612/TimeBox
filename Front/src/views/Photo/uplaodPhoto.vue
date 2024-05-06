@@ -20,7 +20,7 @@ const submit = async () => {
     //console.log(fileList.value)
     const data = new FormData();
     fileList.value.forEach(file => {
-        data.append('files', file.raw);
+        data.append('file', file.raw);
     });
     // 添加调试信息
     // console.log(data)
