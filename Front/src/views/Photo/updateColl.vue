@@ -1,11 +1,11 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useRoute } from 'vue-router'
-import { Delete, ArrowLeftBold } from '@element-plus/icons-vue'
+import { Delete, ArrowLeftBold, Plus } from '@element-plus/icons-vue'
 import router from "@/router";
 
 
-import { updatePhotoCollectionAPI, getPhotoCollectionAPI, deletePhotoCollectionPhotoAPI } from "@/apis/photo"
+import { updatePhotoCollectionAPI, getPhotoCollectionAPI, deletePhotoCollectionAPI } from "@/apis/photo"
 
 
 const { params } = useRoute();
@@ -17,6 +17,35 @@ const backindex = () => {
     router.back();
 }
 
+//修改照片集
+const updateColl = async () => {
+    const res = await updatePhotoCollectionAPI(params.id, collinfo.value)
+    if (res.code == 0) {
+        ElMessage({
+            message: '修改成功',
+            type: 'success',
+        })
+    } else {
+        ElMessage({
+            message: '修改失败',
+            type: 'error',
+        })
+    }
+}
+
+//删除照片集
+const delColl = async () => {
+    let res = await deletePhotoCollectionAPI(params.id)
+    if (res.code == 0) {
+        ElMessage({
+            message: '删除成功',
+            type: 'success',
+        })
+        router.back();
+    }
+}
+
+//删除照片集照片
 const delClphoto = async (id) => {
     let res = await deletePhotoCollectionPhotoAPI(id)
     if (res.code == 0) {
@@ -63,18 +92,20 @@ onMounted(async () => {
                     </el-popover>
 
                 </div>
-                <el-upload action="/api/upload" list-type="picture-card">
-                    <el-icon>
-                        <Plus />
-                    </el-icon>
-                </el-upload>
-                <el-dialog v-model="dialogVisible">
-                    <img w-full :src="dialogImageUrl" alt="Preview Image" />
-                </el-dialog>
+                <div class="flex justify-center items-center" @click="">
+                    <div style="width: 148px; height: 148px;"
+                        class="flex flex-col justify-center items-center rounded-lg border-dashed">
+                        <div class="font-bold">添加照片</div>
+                        <el-select v-model="value" placeholder="选择" size="large" style="width: 140px">
+                            <el-option v-for="item in options" :key="item.value" :label="item.label"
+                                :value="item.value" />
+                        </el-select>
+                    </div>
+                </div>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="updatePhotoCollectionAPI(collinfo)">修改</el-button>
-                <el-button type="danger" @click="deletePhotoCollectionAPI(collinfo.id)">删除</el-button>
+                <el-button type="primary" @click="updateColl">修改</el-button>
+                <el-button type="danger" @click="delColl">删除</el-button>
                 <el-button>取消</el-button>
 
             </el-form-item>

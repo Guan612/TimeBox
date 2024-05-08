@@ -3,8 +3,8 @@ import { ref, onMounted } from 'vue';
 import { addPhotoCollectionAPI, findMyPhotoAPI } from '@/apis/photo'
 
 const collinfo = ref({
-    photoname: '',
-    photodes: '',
+    photoName: '',
+    photoDes: '',
     photoUrl: ''
 })
 
@@ -32,10 +32,10 @@ onMounted(() => {
         <div>创建合集</div>
         <ElForm v-model="collinfo" label-position="top">
             <ElFormItem label="相册集名称">
-                <ElInput v-model="collinfo.photoname" maxlength="20" show-word-limit clearable />
+                <ElInput v-model="collinfo.photoName" maxlength="20" show-word-limit clearable />
             </ElFormItem>
             <ElFormItem label="相册集描述">
-                <ElInput v-model="collinfo.photodes" type="textarea" autosize maxlength="200" show-word-limit :rows="2"
+                <ElInput v-model="collinfo.photoDes" type="textarea" autosize maxlength="200" show-word-limit :rows="2"
                     clearable />
             </ElFormItem>
 

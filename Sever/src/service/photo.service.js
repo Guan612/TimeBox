@@ -71,8 +71,8 @@ class photoService {
     async add(photoInfo) {
         const res = await prisma.photoCollectionInfo.create({
             data: {
-                name: photoInfo.photoName,
-                description: photoInfo.photoDes,
+                photoName: photoInfo.photoName,
+                photoDes: photoInfo.photoDes,
                 userId: photoInfo.id,
             }
         })
@@ -233,9 +233,15 @@ class photoService {
                 id: true,
                 photoUrl: true,
                 photoAndColl: {
+                    where:{
+                        isDel: false
+                    },
                     select: {
                         photoCollectionId: true,
                         photoCollection: {
+                            where: {
+                                isDel: false
+                            },
                             select: {
                                 photoName: true,
                                 photoDes: true,
