@@ -1,3 +1,5 @@
+const fs = require('fs');
+const ExifReader = require('exifreader');
 const {
     getAll,
     getDetailed,
@@ -81,8 +83,8 @@ class photoController {
             code: 0,
             msg: '添加照片集里面的照片成功',
             reslut: {
-                photoId:res.photoId,
-                photoCollectionId:res.photoCollectionId
+                photoId: res.photoId,
+                photoCollectionId: res.photoCollectionId
             }
         }
     }
@@ -106,13 +108,13 @@ class photoController {
             code: 0,
             msg: '删除照片成功',
             reslut: {
-                id:res.id,
-                isDel:res.isDel
+                id: res.id,
+                isDel: res.isDel
             }
         }
     }
 
-    
+
 
     //单/多文件上传测试
     async uploadPhoto(ctx) {
@@ -139,10 +141,12 @@ class photoController {
                 return ctx.app.emit('error', unSupportedFileType, ctx);
             }
 
+            //const shoottime = await readExif({ path: path });
             const fileSize = (size / 1024 / 1024).toFixed(2);
 
             const photoInfo = {
                 id,
+                //photoShootTime:shoottime,
                 filepath: BASE_IMG_URL + newFilename,
                 originalFilename,
                 fileSize: `${fileSize} MB`
@@ -211,6 +215,25 @@ class photoController {
             msg: '我的照片集显示成功',
             reslut: res
         }
+    }
+
+    //读取照片拍摄时间信息
+    async readExif(file) {
+        return new Promise((resolve, reject) => {
+            fs.readFile(file.path, (err, data) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    try {
+                        const tags = ExifReader.load(data);
+                        const shoottime = tags['DateTimeOriginal'] ? tags['DateTimeOriginal'].description : null;
+                        resolve(shoottime);
+                    } catch (error) {
+                        reject(error);
+                    }
+                }
+            });
+        });
     }
 
 
