@@ -24,6 +24,10 @@ export const updatePhotoCollectionAPI = (pCId, data) => {
 export const deletePhotoCollectionAPI = (pCId) => {
     return http.delete(`/photos/${pCId}`);
 }
+//添加照片集照片
+export const addPhotoCollectionPhotoAPI = (pCId, data) => {
+    return http.post(`/photos/clphoto/${pCId}`, data);
+}
 
 //删除照片集照片
 export const deletePhotoCollectionPhotoAPI = (pId) => {

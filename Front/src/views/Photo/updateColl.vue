@@ -5,12 +5,12 @@ import { Delete, ArrowLeftBold, Plus } from '@element-plus/icons-vue'
 import router from "@/router";
 
 
-import { updatePhotoCollectionAPI, getPhotoCollectionAPI, deletePhotoCollectionAPI } from "@/apis/photo"
+import { updatePhotoCollectionAPI, getPhotoCollectionAPI, deletePhotoCollectionAPI, findMyPhotoAPI, addPhotoCollectionPhotoAPI } from "@/apis/photo"
 
 
 const { params } = useRoute();
 const collinfo = ref({})
-
+const options = ref([])
 
 const backindex = () => {
     //使用back方法返回上一级
@@ -44,6 +44,19 @@ const delColl = async () => {
         router.back();
     }
 }
+//添加照片集照片
+const addClphoto = async (id) => {
+    let res = await addPhotoCollectionPhotoAPI(params.id, id)
+    if (res.code == 0) {
+        ElMessage({
+            message: '添加成功',
+            type: 'success',
+        })
+        // let { reslut } = await getPhotoCollectionAPI(params.id)
+        // collinfo.value = reslut
+        //collinfo.value.photoslist = collinfo.value.photoslist.filter(item => item.id != id)
+    }
+}
 
 //删除照片集照片
 const delClphoto = async (id) => {
@@ -59,10 +72,17 @@ const delClphoto = async (id) => {
     }
 }
 
+const getMyPhoto = async () => {
+    const res = await findMyPhotoAPI()
+    //console.log(res)
+    options.value = res.reslut
+}
+
 onMounted(async () => {
     let { reslut } = await getPhotoCollectionAPI(params.id)
     collinfo.value = reslut
     //console.log(photoCollinfo.value)
+    getMyPhoto()
 })
 
 </script>
@@ -98,7 +118,13 @@ onMounted(async () => {
                         <div class="font-bold">添加照片</div>
                         <el-select v-model="value" placeholder="选择" size="large" style="width: 140px">
                             <el-option v-for="item in options" :key="item.value" :label="item.label"
-                                :value="item.value" />
+                                :value="item.value">
+                                <div class="flex flex-row">
+                                    <div class="grid grid-cols-3">
+                                        <el-image :src="item.photoUrl" style="width: 100px;" @cilck="addClphoto(item.id)"></el-image>
+                                    </div>
+                                </div>
+                            </el-option>
                         </el-select>
                     </div>
                 </div>
