@@ -135,18 +135,34 @@ class photoController {
 
         for (const file of fileArray) {
             //console.log(file);
-            const { mimetype, newFilename, originalFilename, path, size } = file;
+            const { mimetype, newFilename, originalFilename, filepath, size } = file;
 
             if (!fileTypes.includes(mimetype)) {
                 return ctx.app.emit('error', unSupportedFileType, ctx);
             }
 
-            //const shoottime = await readExif({ path: path });
             const fileSize = (size / 1024 / 1024).toFixed(2);
+
+            //console.log('Uploaded Files:', ctx.request.files);
+            // console.log('File Path:', path);
+            // const buffer = fs.readFileSync(path);
+            //读取 EXIF 信息
+            let shoottime = null;
+            try {
+                const buffer = fs.readFileSync(filepath); // 读取文件的二进制数据
+                const tags = ExifReader.load(buffer);
+                //console.log('tags:', tags);
+                if (tags && tags['DateTimeOriginal']) {
+                    shoottime = tags['DateTimeOriginal'].description;
+                    //console.log('shoottime:', shoottime);
+                }
+            } catch (error) {
+                console.error('Error reading EXIF:', error);
+            }
 
             const photoInfo = {
                 id,
-                //photoShootTime:shoottime,
+                photoShootTime:shoottime,
                 filepath: BASE_IMG_URL + newFilename,
                 originalFilename,
                 fileSize: `${fileSize} MB`
@@ -217,24 +233,7 @@ class photoController {
         }
     }
 
-    //读取照片拍摄时间信息
-    async readExif(file) {
-        return new Promise((resolve, reject) => {
-            fs.readFile(file.path, (err, data) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    try {
-                        const tags = ExifReader.load(data);
-                        const shoottime = tags['DateTimeOriginal'] ? tags['DateTimeOriginal'].description : null;
-                        resolve(shoottime);
-                    } catch (error) {
-                        reject(error);
-                    }
-                }
-            });
-        });
-    }
+
 
 
 

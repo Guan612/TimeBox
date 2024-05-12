@@ -161,7 +161,7 @@ class photoService {
             data: {
                 userId: photoInfo.id,
                 photoUrl: photoInfo.filepath,
-                //photoShootTime: photoInfo.photoShootTime,
+                photoShootTime: photoInfo.photoShootTime,
                 //photoCollectionId: photoInfo.photoCollectionId * 1,
             }
         })
