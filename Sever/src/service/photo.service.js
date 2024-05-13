@@ -237,6 +237,7 @@ class photoService {
                 photoUrl: true,
                 photoMake:true,
                 photoModel:true,
+                photoShootTime:true,
                 photoAndColl: {
                     where:{
                         isDel: false
