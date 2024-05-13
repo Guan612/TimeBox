@@ -148,12 +148,16 @@ class photoController {
             // const buffer = fs.readFileSync(path);
             //读取 EXIF 信息
             let shoottime = null;
+            let make = null;
+            let model = null;
             try {
                 const buffer = fs.readFileSync(filepath); // 读取文件的二进制数据
                 const tags = ExifReader.load(buffer);
                 //console.log('tags:', tags);
                 if (tags && tags['DateTimeOriginal']) {
                     shoottime = tags['DateTimeOriginal'].description;
+                    make = tags['Make'].description;
+                    model = tags['Model'].description;
                     //console.log('shoottime:', shoottime);
                 }
             } catch (error) {
@@ -163,6 +167,8 @@ class photoController {
             const photoInfo = {
                 id,
                 photoShootTime:shoottime,
+                photoMake:make,
+                photoModel:model,
                 filepath: BASE_IMG_URL + newFilename,
                 originalFilename,
                 fileSize: `${fileSize} MB`

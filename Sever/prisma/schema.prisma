@@ -17,18 +17,18 @@ datasource db {
 
 //用户表
 model User {
-  id              Int                   @id @default(autoincrement())
-  loginid         String                @unique
-  nickname        String?
-  password        String
-  email           String?               @unique
-  phones          String?               @unique
-  isDel           Boolean               @default(false)
-  createdAt       DateTime              @default(dbgenerated("now()")) @db.DateTime
-  updatedAt       DateTime              @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0) //解决prisma时区问题
-  userHaderImg    UserHaderImg[]
-  PhotoInfo       PhotoCollectionInfo[]
-  Photo PhotosList[]
+  id           Int                   @id @default(autoincrement())
+  loginid      String                @unique
+  nickname     String?
+  password     String
+  email        String?               @unique
+  phones       String?               @unique
+  isDel        Boolean               @default(false)
+  createdAt    DateTime              @default(dbgenerated("now()")) @db.DateTime
+  updatedAt    DateTime              @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0) //解决prisma时区问题
+  userHaderImg UserHaderImg[]
+  PhotoInfo    PhotoCollectionInfo[]
+  Photo        PhotosList[]
 }
 
 //用户头像表
@@ -63,6 +63,8 @@ model PhotosList {
   userId         Int
   photoUrl       String?
   photoShootTime String?
+  photoMake      String?
+  photoModel     String?
   isDel          Boolean              @default(false)
   createdAt      DateTime             @default(dbgenerated("now()")) @db.DateTime
   updatedAt      DateTime             @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)

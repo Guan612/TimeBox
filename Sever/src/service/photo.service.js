@@ -162,6 +162,8 @@ class photoService {
                 userId: photoInfo.id,
                 photoUrl: photoInfo.filepath,
                 photoShootTime: photoInfo.photoShootTime,
+                photoMake:photoInfo.photoMake,
+                photoModel:photoInfo.photoModel,
                 //photoCollectionId: photoInfo.photoCollectionId * 1,
             }
         })
