@@ -8,7 +8,7 @@ const dialogVisible = ref(false);
 const dialogImageUrl = ref('');
 
 const handleRemove = (uploadFile, uploadFiles) => {
-  console.log(uploadFile, uploadFiles)
+    console.log(uploadFile, uploadFiles)
 }
 
 const handlePictureCardPreview = (uploadFile) => {
@@ -31,8 +31,8 @@ const submit = async () => {
     //data.append('param2', 'value2');
 
     const res = await uploadPhotoAPI(data);
-    console.log(res)
-    if(res.code === 0){
+    //console.log(res)
+    if (res.code === 0) {
         ElMessage({
             message: '上传成功',
             type: 'success',
@@ -52,8 +52,7 @@ const submit = async () => {
 <template>
     <div class="flex flex-col m-2">
         <div>
-            <el-upload v-model:file-list="fileList"
-                :auto-upload="false" list-type="picture-card"
+            <el-upload v-model:file-list="fileList" :auto-upload="false" list-type="picture-card"
                 :on-preview="handlePictureCardPreview" :on-remove="handleRemove" multiple>
                 <el-icon>
                     <Plus />

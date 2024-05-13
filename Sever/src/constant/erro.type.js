@@ -52,5 +52,9 @@ module.exports = {
       createPhotoCardError:{
         code: '10203',
         message: '创建照片合集信息错误',
+      },
+      uploadFileError:{
+        code: '10300',
+        message: '照片上传为空',
       }
 }
