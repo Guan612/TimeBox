@@ -77,8 +77,6 @@ model PhotosAndPhotoColl {
   id                Int                  @id @default(autoincrement())
   photoCollectionId Int
   photoId           Int
-  createdAt         DateTime             @default(dbgenerated("now()")) @db.DateTime
-  updatedAt         DateTime             @default(dbgenerated("NOW() ON UPDATE NOW()")) @db.Timestamp(0)
   photoCollection   PhotoCollectionInfo? @relation(fields: [photoCollectionId], references: [id])
   photo             PhotosList?          @relation(fields: [photoId], references: [id])
   isDel             Boolean              @default(false)
