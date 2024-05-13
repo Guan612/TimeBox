@@ -51,13 +51,13 @@ onMounted(() => {
         </div>
     </div>
 
-    <div class="flex flex-row m-5">
+    <div class="flex flex-row m-5 justify-center">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <!-- 使用 v-for 循环渲染图片 -->
             <div v-for="photo in photos" :key="photo.id" class="flex justify-center">
                 <el-popover placement="bottom" :width="280" trigger="click">
                     <template #reference>
-                        <el-image :src="photo.photoUrl" fit="cover" style="height: 200px;" lazy
+                        <el-image :src="photo.photoUrl" fit="cover" style="height: 230px;" lazy
                             class="rounded-lg shadow-lg cursor-pointer hover:scale-105 transition-transform duration-300 ease-in-out"></el-image>
                         <!-- <el-button class="m-2">Click to activate</el-button> -->
                     </template>
