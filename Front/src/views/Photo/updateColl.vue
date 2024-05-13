@@ -11,6 +11,8 @@ import { updatePhotoCollectionAPI, getPhotoCollectionAPI, deletePhotoCollectionA
 const { params } = useRoute();
 const collinfo = ref({})
 const options = ref([])
+const DelVisible = ref(false);
+const UpdateVisible = ref(false);
 
 const backindex = () => {
     //使用back方法返回上一级
@@ -25,6 +27,9 @@ const updateColl = async () => {
             message: '修改成功',
             type: 'success',
         })
+        UpdateVisible.value = false;
+        let { reslut } = await getPhotoCollectionAPI(params.id)
+        collinfo.value = reslut
     } else {
         ElMessage({
             message: '修改失败',
@@ -41,6 +46,7 @@ const delColl = async () => {
             message: '删除成功',
             type: 'success',
         })
+        DelVisible.value = false;
         router.back();
     }
 }
@@ -88,6 +94,26 @@ onMounted(async () => {
 </script>
 
 <template>
+    <el-dialog v-model="DelVisible" title="确认删除？" width="300">
+        <template #footer>
+            <div class="dialog-footer">
+                <el-button type="danger" @click="delColl">
+                    删除
+                </el-button>
+                <el-button type="primary" @click="dialogVisible = false">取消</el-button>
+            </div>
+        </template>
+    </el-dialog>
+    <el-dialog v-model="UpdateVisible" title="确认修改？" width="300">
+        <template #footer>
+            <div class="dialog-footer">
+                <el-button type="danger" @click="updateColl">
+                    修改
+                </el-button>
+                <el-button type="primary" @click="dialogVisible = false">取消</el-button>
+            </div>
+        </template>
+    </el-dialog>
     <div class="m-2">
         <el-button @click="backindex" :icon="ArrowLeftBold" round></el-button>
     </div>
@@ -121,7 +147,8 @@ onMounted(async () => {
                                 :value="item.value">
                                 <div class="flex flex-row">
                                     <div class="grid grid-cols-3">
-                                        <el-image :src="item.photoUrl" style="width: 100px;" @cilck="addClphoto(item.id)"></el-image>
+                                        <el-image :src="item.photoUrl" style="width: 100px;"
+                                            @cilck="addClphoto(item.id)"></el-image>
                                     </div>
                                 </div>
                             </el-option>
@@ -130,8 +157,8 @@ onMounted(async () => {
                 </div>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="updateColl">修改</el-button>
-                <el-button type="danger" @click="delColl">删除</el-button>
+                <el-button type="primary" @click="UpdateVisible = true">修改</el-button>
+                <el-button type="danger" @click="DelVisible = true">删除</el-button>
                 <el-button>取消</el-button>
 
             </el-form-item>

@@ -2,6 +2,7 @@
 import { findMyPhotoAPI, deletePhotoAPI } from '@/apis/photo'
 import { onMounted, ref } from 'vue';
 import { Edit, Delete, Plus } from '@element-plus/icons-vue'
+const photoid = ref()
 const photos = ref([])
 const timeSelect = ref([])
 const makeSelect = ref([
@@ -24,6 +25,12 @@ const modelSelect = ref([
         label: 'Google',
     },
 ])
+const dialogVisible = ref(false)
+
+const confirmDelete = (id)=>{
+    photoid.value = id
+    dialogVisible.value = true
+}
 
 const getMyPhoto = async () => {
     const res = await findMyPhotoAPI()
@@ -37,6 +44,7 @@ const delphoto = async (id) => {
             message: '删除成功',
             type: 'success',
         })
+        dialogVisible.value = false
         getMyPhoto()
     }
 }
@@ -47,6 +55,16 @@ onMounted(() => {
 </script>
 
 <template>
+    <el-dialog v-model="dialogVisible" title="确认删除？" width="300">
+        <template #footer>
+            <div class="dialog-footer">
+                <el-button type="danger" @click="delphoto(photoid)">
+                    删除
+                </el-button>
+                <el-button type="primary" @click="dialogVisible = false">取消</el-button>
+            </div>
+        </template>
+    </el-dialog>
     <div class="hidden lg:block">
         <div class="flex flex-row justify-center bg-gradient-to-r from-transblue to-transpink">
             <div class="m-1">
@@ -87,7 +105,7 @@ onMounted(() => {
                         <div class="felx flex-row justify-center m-2">
                             <el-button :icon="Plus" round></el-button>
                             <el-button :icon="Edit" round type="primary"></el-button>
-                            <el-button :icon="Delete" type="danger" round @click="delphoto(photo.id)"></el-button>
+                            <el-button :icon="Delete" type="danger" round @click="confirmDelete(photo.id)"></el-button>
                         </div>
                         <div class="m-2">
                             <div v-if="photo.photoAndColl.length > 0">
