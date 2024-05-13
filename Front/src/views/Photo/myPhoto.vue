@@ -25,6 +25,32 @@ onMounted(() => {
 </script>
 
 <template>
+    <div class="hidden lg:block">
+        <div class="flex flex-row justify-center bg-gradient-to-r from-transblue to-transpink">
+            <div class="m-1">
+                <el-select v-model="value" multiple filterable allow-create default-first-option
+                    :reserve-keyword="false" placeholder="时间" style="width: 240px">
+                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+                </el-select>
+            </div>
+            <div class="m-1">
+                <el-select v-model="value" multiple filterable allow-create default-first-option
+                    :reserve-keyword="false" placeholder="拍摄设备" style="width: 240px">
+                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+                </el-select>
+            </div>
+            <div class="m-1">
+                <el-select v-model="value" multiple filterable allow-create default-first-option
+                    :reserve-keyword="false" placeholder="型号" style="width: 240px">
+                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+                </el-select>
+            </div>
+            <div class="m-1">
+                <elButton>查找</elButton>
+            </div>
+        </div>
+    </div>
+
     <div class="flex flex-row m-5">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <!-- 使用 v-for 循环渲染图片 -->
