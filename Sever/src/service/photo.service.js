@@ -235,6 +235,8 @@ class photoService {
             select: {
                 id: true,
                 photoUrl: true,
+                photoMake:true,
+                photoModel:true,
                 photoAndColl: {
                     where:{
                         isDel: false

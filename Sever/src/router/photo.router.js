@@ -11,6 +11,7 @@ const {
     uploadPhoto,
     findPhotoCollUser,
     showMyPhoto,
+    filterMyPhoto,
     showMyPhotoColl,
     delPhotoCollPhoto,
     delPhoto,
@@ -32,6 +33,9 @@ router.get('/myphoto', auth, showMyPhoto)
 
 //获取我的照片集列表
 router.get('/mycoll', auth, showMyPhotoColl)
+
+//筛选照片
+router.get('/photoseleter', auth, filterMyPhoto)
 
 //获取照片合集详细信息(photo_collection_id)
 router.get('/:id', getDetailedColl)

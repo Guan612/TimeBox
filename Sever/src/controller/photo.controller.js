@@ -114,9 +114,7 @@ class photoController {
         }
     }
 
-
-
-    //单/多文件上传测试
+    //单/多文件上传
     async uploadPhoto(ctx) {
         const files = ctx.request.files.file;
         //console.log(files);
@@ -225,6 +223,15 @@ class photoController {
             code: 0,
             msg: '我的照片显示成功',
             reslut: res
+        }
+    }
+
+    //我的照片筛选
+    async filterMyPhoto(ctx) {
+        ctx.body = {
+            code: 0,
+            msg: '测试成功',
+            reslut: 'test'
         }
     }
 
