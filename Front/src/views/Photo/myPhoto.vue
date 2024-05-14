@@ -1,10 +1,11 @@
 <script setup>
-import { findMyPhotoAPI, deletePhotoAPI } from '@/apis/photo'
+import { findMyPhotoAPI, deletePhotoAPI, getPhotoListAPI } from '@/apis/photo'
 import { onMounted, ref } from 'vue';
 import { Edit, Delete, Plus } from '@element-plus/icons-vue'
 const photoid = ref()
 const photos = ref([])
 const timeSelect = ref([])
+const options = ref([])
 const makeSelect = ref([
     {
         value: 'Xiaomi',
@@ -25,11 +26,19 @@ const modelSelect = ref([
         label: 'Google',
     },
 ])
-const dialogVisible = ref(false)
+const dialogVisible = ref(false);
+const addVisible = ref(false);
 
-const confirmDelete = (id)=>{
+const confirmDelete = (id) => {
     photoid.value = id
     dialogVisible.value = true
+}
+
+const addConfirm = async(id) => {
+    addVisible.value = true
+    const res = await getPhotoListAPI();
+    options.value = res.reslut
+    
 }
 
 const getMyPhoto = async () => {
@@ -62,6 +71,17 @@ onMounted(() => {
                     删除
                 </el-button>
                 <el-button type="primary" @click="dialogVisible = false">取消</el-button>
+            </div>
+        </template>
+    </el-dialog>
+    <el-dialog v-model="addVisible" title="请选择照片集" width="300">
+        <template #fotter>
+            <div class="dialog-fotter">
+                <el-select v-model="options.id" placeholder="请选择">
+                    <el-option v-for="item in options" :key="item.id" :label="item.photoDes" :value="item.photoDes">
+                        <div>{{item.photoDes}}</div>
+                    </el-option>
+                </el-select>
             </div>
         </template>
     </el-dialog>
@@ -103,7 +123,7 @@ onMounted(() => {
                     </template>
                     <div class="flex flex-col">
                         <div class="felx flex-row justify-center m-2">
-                            <el-button :icon="Plus" round></el-button>
+                            <el-button :icon="Plus" round @click="addConfirm(photo.id)"></el-button>
                             <el-button :icon="Edit" round type="primary"></el-button>
                             <el-button :icon="Delete" type="danger" round @click="confirmDelete(photo.id)"></el-button>
                         </div>
