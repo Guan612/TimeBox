@@ -1,5 +1,5 @@
 <script setup>
-import { findMyPhotoAPI, deletePhotoAPI, getPhotoListAPI } from '@/apis/photo'
+import { findMyPhotoAPI, deletePhotoAPI, getPhotoListAPI, addPhotoCollectionPhotoAPI } from '@/apis/photo'
 import { onMounted, ref } from 'vue';
 import { Edit, Delete, Plus } from '@element-plus/icons-vue'
 const photoid = ref()
@@ -34,11 +34,25 @@ const confirmDelete = (id) => {
     dialogVisible.value = true
 }
 
-const addConfirm = async(id) => {
+const addConfirm = async (id) => {
     addVisible.value = true
     const res = await getPhotoListAPI();
     options.value = res.reslut
-    
+    photoid.value = id
+
+}
+
+const addCollPhoto = async (data) => {
+    console.log(options.value.id)
+    const res = await addPhotoCollectionPhotoAPI(options.value.id,data)
+    if (res.code == 0) {
+        ElMessage({
+            message: '添加成功',
+            type: 'success',
+        })
+        addVisible.value = false
+        getMyPhoto()
+    }
 }
 
 const getMyPhoto = async () => {
@@ -75,13 +89,18 @@ onMounted(() => {
         </template>
     </el-dialog>
     <el-dialog v-model="addVisible" title="请选择照片集" width="300">
-        <template #fotter>
-            <div class="dialog-fotter">
+        <template #footer>
+            <div class="dialog-footer">
                 <el-select v-model="options.id" placeholder="请选择">
-                    <el-option v-for="item in options" :key="item.id" :label="item.photoDes" :value="item.photoDes">
-                        <div>{{item.photoDes}}</div>
+                    <el-option v-for="item in options" :key="item.id" :label="item.photoName" :value="item.id">
                     </el-option>
                 </el-select>
+                <div class="m-1">
+                    <el-button type="primary" @click="addCollPhoto(photoid)">
+                        添加
+                    </el-button>
+                    <el-button @click="addVisible = false">取消</el-button>
+                </div>
             </div>
         </template>
     </el-dialog>
@@ -90,7 +109,7 @@ onMounted(() => {
             <div class="m-1">
                 <el-select v-model="value" multiple filterable allow-create default-first-option
                     :reserve-keyword="false" placeholder="时间" style="width: 240px">
-                    <el-option v-for="item in timeSelect" :key="item.value" :label="item.label" :value="item.value" />
+                    <el-option v-for="item in timeSelect" :key="item.value" :label="item.label" :value="item.id" />
                 </el-select>
             </div>
             <div class="m-1">
