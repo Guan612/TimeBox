@@ -78,7 +78,8 @@ class photoController {
     //添加照片集里面的照片
     async addPhotoCollPhoto(ctx) {
         const { photoId, photoCollectionId } = ctx.request.body;
-        const res = await addPhotoToCl({ photoId, photoCollectionId });
+        //console.log(photoId, photoCollectionId);
+        const res = await addPhotoToCl({photoId, photoCollectionId});
         ctx.body = {
             code: 0,
             msg: '添加照片集里面的照片成功',

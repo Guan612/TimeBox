@@ -3,6 +3,7 @@ import { findMyPhotoAPI, deletePhotoAPI, getPhotoListAPI, addPhotoCollectionPhot
 import { onMounted, ref } from 'vue';
 import { Edit, Delete, Plus } from '@element-plus/icons-vue'
 const photoid = ref()
+const photoCollectionid = ref()
 const photos = ref([])
 const timeSelect = ref([])
 const options = ref([])
@@ -26,6 +27,10 @@ const modelSelect = ref([
         label: 'Google',
     },
 ])
+const photoaddinfo = ref({
+    "photoId":photoid,
+    "photoCollectionId":photoCollectionid
+})
 const dialogVisible = ref(false);
 const addVisible = ref(false);
 
@@ -43,8 +48,9 @@ const addConfirm = async (id) => {
 }
 
 const addCollPhoto = async (id) => {
-    console.log(options.value.id)
-    const res = await addPhotoCollectionPhotoAPI(options.value.id,id)
+    //console.log(options.value.id)
+    photoCollectionid.value = options.value.id
+    const res = await addPhotoCollectionPhotoAPI(photoaddinfo.value)
     if (res.code == 0) {
         ElMessage({
             message: '添加成功',

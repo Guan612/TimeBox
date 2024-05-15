@@ -123,7 +123,7 @@ class photoService {
     async deleteClPhoto(photoId) {
         const res = await prisma.photosAndPhotoColl.update({
             where: {
-                id: photoId
+                photoId: photoId
             },
             data: {
                 isDel: true

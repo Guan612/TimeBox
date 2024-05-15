@@ -5,7 +5,7 @@ import { Delete, ArrowLeftBold, Plus } from '@element-plus/icons-vue'
 import router from "@/router";
 
 
-import { updatePhotoCollectionAPI, getPhotoCollectionAPI, deletePhotoCollectionAPI, findMyPhotoAPI, addPhotoCollectionPhotoAPI } from "@/apis/photo"
+import { updatePhotoCollectionAPI, getPhotoCollectionAPI, deletePhotoCollectionAPI, findMyPhotoAPI, addPhotoCollectionPhotoAPI, deletePhotoCollectionPhotoAPI } from "@/apis/photo"
 
 
 const { params } = useRoute();
@@ -40,7 +40,7 @@ const updateColl = async () => {
 
 //删除照片集
 const delColl = async () => {
-    let res = await deletePhotoCollectionAPI(params.id)
+    let res = await deletePhotoCollectionPhotoAPI(params.id)
     if (res.code == 0) {
         ElMessage({
             message: '删除成功',
