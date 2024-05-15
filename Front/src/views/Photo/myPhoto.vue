@@ -42,9 +42,9 @@ const addConfirm = async (id) => {
 
 }
 
-const addCollPhoto = async (data) => {
+const addCollPhoto = async (id) => {
     console.log(options.value.id)
-    const res = await addPhotoCollectionPhotoAPI(options.value.id,data)
+    const res = await addPhotoCollectionPhotoAPI(options.value.id,id)
     if (res.code == 0) {
         ElMessage({
             message: '添加成功',
