@@ -13,6 +13,8 @@ const collinfo = ref({})
 const options = ref([])
 const DelVisible = ref(false);
 const UpdateVisible = ref(false);
+const photoVisible = ref(false);
+const photoAndClId = ref()
 
 const backindex = () => {
     //使用back方法返回上一级
@@ -75,7 +77,14 @@ const delClphoto = async (id) => {
 
         //使用filter整理数组
         collinfo.value.photoslist = collinfo.value.photoslist.filter(item => item.id != id)
+        photoVisible.value = false;
     }
+}
+
+//二次确认是否删除
+const suredelphoto = (id) => {
+    photoVisible.value = true;
+    photoAndClId.value = id;
 }
 
 const getMyPhoto = async () => {
@@ -94,6 +103,16 @@ onMounted(async () => {
 </script>
 
 <template>
+    <el-dialog v-model="photoVisible" title="确认删除？" width="300">
+        <template #footer>
+            <div class="dialog-footer">
+                <el-button type="danger" @click="delClphoto(photoAndClId)">
+                    删除
+                </el-button>
+                <el-button type="primary" @click="photoVisible = false">取消</el-button>
+            </div>
+        </template>
+    </el-dialog>
     <el-dialog v-model="DelVisible" title="确认删除？" width="300">
         <template #footer>
             <div class="dialog-footer">
@@ -134,7 +153,7 @@ onMounted(async () => {
                                 fit="cover">
                             </ElImage>
                         </template>
-                        <ElButton type="danger" round :icon="Delete" @click="delClphoto(photo.id)"></ElButton>
+                        <ElButton type="danger" round :icon="Delete" @click="suredelphoto(photo.id)"></ElButton>
                     </el-popover>
 
                 </div>
