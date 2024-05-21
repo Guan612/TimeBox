@@ -53,7 +53,8 @@ class photoService {
 
         //map函数用于重整数组结果,filter排除photos是null的情况
         const photos = res.photoAndColl.filter(item => item.photo !== null).map(item => ({
-            id: item.photo.id,
+            id: item.id,
+            photoid: item.photo.id,
             userid: item.photo.userId,
             photoUrl: item.photo.photoUrl
         }));
@@ -119,11 +120,11 @@ class photoService {
         return res;
     }
 
-    //删除照片集里的照片
-    async deleteClPhoto(photoId) {
+    //删除照片集里的照片(必须加上clid)
+    async deleteClPhoto(id) {
         const res = await prisma.photosAndPhotoColl.update({
             where: {
-                photoId: photoId
+                id: id
             },
             data: {
                 isDel: true
@@ -162,8 +163,8 @@ class photoService {
                 userId: photoInfo.id,
                 photoUrl: photoInfo.filepath,
                 photoShootTime: photoInfo.photoShootTime,
-                photoMake:photoInfo.photoMake,
-                photoModel:photoInfo.photoModel,
+                photoMake: photoInfo.photoMake,
+                photoModel: photoInfo.photoModel,
                 //photoCollectionId: photoInfo.photoCollectionId * 1,
             }
         })
@@ -235,11 +236,11 @@ class photoService {
             select: {
                 id: true,
                 photoUrl: true,
-                photoMake:true,
-                photoModel:true,
-                photoShootTime:true,
+                photoMake: true,
+                photoModel: true,
+                photoShootTime: true,
                 photoAndColl: {
-                    where:{
+                    where: {
                         isDel: false
                     },
                     select: {
