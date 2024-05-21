@@ -42,7 +42,12 @@ const updateColl = async () => {
 
 //删除照片集
 const delColl = async () => {
-    let res = await deletePhotoCollectionPhotoAPI(params.id)
+    let res = await deletePhotoCollectionAPI(params.id)
+
+    //删除照片集同时需要把照片也移出照片
+    for (let i = 0; i < collinfo.value.photoslist.length; i++) {
+        let photoRes = await deletePhotoCollectionPhotoAPI(collinfo.value.photoslist[i].id)
+    }
     if (res.code == 0) {
         ElMessage({
             message: '删除成功',
