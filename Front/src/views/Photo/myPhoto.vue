@@ -6,30 +6,19 @@ const photoid = ref()
 const photoCollectionid = ref()
 const photos = ref([])
 const timeSelect = ref([])
-const options = ref([])
-const makeSelect = ref([
-    {
-        value: 'Xiaomi',
-        label: 'Xiaomi',
-    },
-    {
-        value: 'Google',
-        label: 'Google',
-    },
-])
-const modelSelect = ref([
-    {
-        value: 'Xiaomi',
-        label: 'Xiaomi',
-    },
-    {
-        value: 'Google',
-        label: 'Google',
-    },
-])
+const time = ref()
+const make = ref()
+const model = ref()
+const options = ref({
+    time:time,
+    make:make,
+    model:model,
+})
+const makeSelect = ref([])
+const modelSelect = ref([])
 const photoaddinfo = ref({
-    "photoId":photoid,
-    "photoCollectionId":photoCollectionid
+    "photoId": photoid,
+    "photoCollectionId": photoCollectionid
 })
 const dialogVisible = ref(false);
 const addVisible = ref(false);
@@ -64,6 +53,9 @@ const addCollPhoto = async (id) => {
 const getMyPhoto = async () => {
     const res = await findMyPhotoAPI()
     photos.value = res.reslut
+    timeSelect.value = res.reslut.map(item => item.photoShootTime)
+    makeSelect.value = new Set(res.reslut.map(item => item.photoMake))
+    modelSelect.value = new Set(res.reslut.map(item => item.photoModel))
 }
 
 const delphoto = async (id) => {
@@ -113,21 +105,21 @@ onMounted(() => {
     <div class="hidden lg:block">
         <div class="flex flex-row justify-center bg-gradient-to-r from-transblue to-transpink">
             <div class="m-1">
-                <el-select v-model="value" multiple filterable allow-create default-first-option
+                <el-select v-model="time" multiple filterable allow-create default-first-option
                     :reserve-keyword="false" placeholder="时间" style="width: 240px">
-                    <el-option v-for="item in timeSelect" :key="item.value" :label="item.label" :value="item.id" />
+                    <el-option v-for="item in timeSelect" :key="item" :label="item" :value="item" />
                 </el-select>
             </div>
             <div class="m-1">
-                <el-select v-model="value" multiple filterable allow-create default-first-option
+                <el-select v-model="make" multiple filterable allow-create default-first-option
                     :reserve-keyword="false" placeholder="拍摄设备" style="width: 240px">
-                    <el-option v-for="item in makeSelect" :key="item.value" :label="item.label" :value="item.value" />
+                    <el-option v-for="item in makeSelect" :key="item" :label="item" :value="item" />
                 </el-select>
             </div>
             <div class="m-1">
-                <el-select v-model="value" multiple filterable allow-create default-first-option
+                <el-select v-model="model" multiple filterable allow-create default-first-option
                     :reserve-keyword="false" placeholder="型号" style="width: 240px">
-                    <el-option v-for="item in modelSelect" :key="item.value" :label="item.label" :value="item.value" />
+                    <el-option v-for="item in modelSelect" :key="item" :label="item" :value="item" />
                 </el-select>
             </div>
             <div class="m-1">
