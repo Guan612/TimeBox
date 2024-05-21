@@ -1,5 +1,5 @@
 <script setup>
-import { findMyPhotoAPI, deletePhotoAPI, getPhotoListAPI, addPhotoCollectionPhotoAPI } from '@/apis/photo'
+import { findMyPhotoAPI, deletePhotoAPI, getPhotoListAPI, addPhotoCollectionPhotoAPI, filterPhotoAPI } from '@/apis/photo'
 import { onMounted, ref } from 'vue';
 import { Edit, Delete, Plus } from '@element-plus/icons-vue'
 const photoid = ref()
@@ -10,9 +10,9 @@ const time = ref()
 const make = ref()
 const model = ref()
 const options = ref({
-    time:time,
-    make:make,
-    model:model,
+    time: time.value,
+    make: make.value,
+    model: model.value,
 })
 const makeSelect = ref([])
 const modelSelect = ref([])
@@ -22,6 +22,12 @@ const photoaddinfo = ref({
 })
 const dialogVisible = ref(false);
 const addVisible = ref(false);
+
+//筛选照片
+const filterPhoto = () => {
+    filterPhotoAPI(options.value)
+}
+
 
 const confirmDelete = (id) => {
     photoid.value = id
@@ -105,14 +111,14 @@ onMounted(() => {
     <div class="hidden lg:block">
         <div class="flex flex-row justify-center bg-gradient-to-r from-transblue to-transpink">
             <div class="m-1">
-                <el-select v-model="time" multiple filterable allow-create default-first-option
-                    :reserve-keyword="false" placeholder="时间" style="width: 240px">
+                <el-select v-model="time" multiple filterable allow-create default-first-option :reserve-keyword="false"
+                    placeholder="时间" style="width: 240px">
                     <el-option v-for="item in timeSelect" :key="item" :label="item" :value="item" />
                 </el-select>
             </div>
             <div class="m-1">
-                <el-select v-model="make" multiple filterable allow-create default-first-option
-                    :reserve-keyword="false" placeholder="拍摄设备" style="width: 240px">
+                <el-select v-model="make" multiple filterable allow-create default-first-option :reserve-keyword="false"
+                    placeholder="拍摄设备" style="width: 240px">
                     <el-option v-for="item in makeSelect" :key="item" :label="item" :value="item" />
                 </el-select>
             </div>
@@ -123,7 +129,7 @@ onMounted(() => {
                 </el-select>
             </div>
             <div class="m-1">
-                <elButton>查找</elButton>
+                <elButton @click="filterPhoto">查找</elButton>
             </div>
         </div>
     </div>

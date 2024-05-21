@@ -229,10 +229,16 @@ class photoController {
 
     //我的照片筛选
     async filterMyPhoto(ctx) {
+        const {time,make,model} = ctx.request.body;
+        console.log(ctx.request.body)
         ctx.body = {
             code: 0,
             msg: '测试成功',
-            reslut: 'test'
+            reslut: {
+                time,
+                make,
+                model
+            }
         }
     }
 

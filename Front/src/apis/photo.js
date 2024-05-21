@@ -67,3 +67,8 @@ export const findMyPhotoAPI = () => {
 export const findMyPhotoCollAPI = () => {
     return http.get('/photos/mycoll');
 }
+
+//筛选照片
+export const filterPhotoAPI = (data) => {
+    return http.get("/photos/photoseleter",data)   
+}
