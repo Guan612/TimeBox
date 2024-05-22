@@ -4,40 +4,14 @@ import { ref, onMounted } from 'vue'
 import collectionCard from './component/collectionCard.vue';
 
 const photoList = ref({})
+const timeLine = ref([])
 const getphoto = async () => {
     const res = await getPhotoListAPI()
     photoList.value = res.reslut
+    timeLine.value = res.reslut.map(item =>{
+        return {timestamp:item.createdAt.slice(0,4)}
+    })
 }
-
-const activities = [
-  {
-    timestamp: '2024',
-  },
-  {
-    timestamp: '2023',
-  },
-  {
-    timestamp: '2022',
-  },
-  {
-    timestamp: '2021',
-  },
-  {
-    timestamp: '2020',
-  },
-  {
-    timestamp: '2019',
-  },
-  {
-    timestamp: '2018',
-  },
-  {
-    timestamp: '2017',
-  },
-  {
-    timestamp: '2016',
-  },
-]
 
 onMounted(() => {
     getphoto()
@@ -58,7 +32,7 @@ onMounted(() => {
         </div>
         <div class="w-1/5 mr-2">
             <el-timeline>
-                <el-timeline-item v-for="(activity, index) in activities" :key="index" 
+                <el-timeline-item v-for="(activity, index) in timeLine" :key="index" 
                     :timestamp="activity.timestamp">
                 </el-timeline-item>
             </el-timeline>
