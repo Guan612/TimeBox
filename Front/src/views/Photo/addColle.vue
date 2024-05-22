@@ -1,6 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { addPhotoCollectionAPI, findMyPhotoAPI } from '@/apis/photo'
+import router from "@/router";
+
+const backindex = () => {
+    //使用back方法返回上一级
+    router.back();
+}
 
 const collinfo = ref({
     photoName: '',
@@ -10,7 +16,19 @@ const collinfo = ref({
 
 const cratePhotoColl = async () => {
     const res = await addPhotoCollectionAPI(collinfo.value)
-    console.log(res)
+    //console.log(res)
+    if (res.code == 0) {
+        ElMessage({
+            message: '添加成功',
+            type: 'success',
+        })
+        backindex()
+    } else {
+        ElMessage({
+            message: '添加失败',
+            type: 'error',
+        })
+    }
 }
 
 const options = ref([])
