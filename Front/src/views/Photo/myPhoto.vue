@@ -9,7 +9,8 @@ const timeSelect = ref([])
 const time = ref()
 const make = ref()
 const model = ref()
-const options = ref({
+const addoptions = ref([])
+const Seloptions = ref({
     time: time.value,
     make: make.value,
     model: model.value,
@@ -25,7 +26,7 @@ const addVisible = ref(false);
 
 //筛选照片
 const filterPhoto = () => {
-    filterPhotoAPI(options.value)
+    filterPhotoAPI(addoptions.value)
 }
 
 
@@ -37,14 +38,15 @@ const confirmDelete = (id) => {
 const addConfirm = async (id) => {
     addVisible.value = true
     const res = await getPhotoListAPI();
-    options.value = res.reslut
+    //console.log(res)
+    addoptions.value = res.reslut
     photoid.value = id
 
 }
 
 const addCollPhoto = async (id) => {
     //console.log(options.value.id)
-    photoCollectionid.value = options.value.id
+    photoCollectionid.value = addoptions.value.id
     const res = await addPhotoCollectionPhotoAPI(photoaddinfo.value)
     if (res.code == 0) {
         ElMessage({
@@ -95,8 +97,8 @@ onMounted(() => {
     <el-dialog v-model="addVisible" title="请选择照片集" width="300">
         <template #footer>
             <div class="dialog-footer">
-                <el-select v-model="options.id" placeholder="请选择">
-                    <el-option v-for="item in options" :key="item.id" :label="item.photoName" :value="item.id">
+                <el-select v-model="addoptions.id" placeholder="请选择">
+                    <el-option v-for="item in addoptions" :key="item.id" :label="item.photoName" :value="item.id">
                     </el-option>
                 </el-select>
                 <div class="m-1">
