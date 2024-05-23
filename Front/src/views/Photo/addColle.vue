@@ -75,7 +75,7 @@ onMounted(() => {
                     </el-form-item>
 
                     <el-form-item label="从已经上传的照片选择" class="m-2 basis-1/2">
-                        <el-select v-model="collinfo.photoUrl" placeholder="请选择">
+                        <el-select v-model="collinfo.photoUrl" @change="selChange" placeholder="请选择">
                             <el-option v-for="item in options" :key="item.id" :label="item.label" :value="item.photoUrl">
                                 <div class="flex flex-row">
                                     <div class="grid grid-cols-3">

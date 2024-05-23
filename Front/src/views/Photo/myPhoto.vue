@@ -6,14 +6,11 @@ const photoid = ref()
 const photoCollectionid = ref()
 const photos = ref([])
 const timeSelect = ref([])
-const time = ref()
-const make = ref()
-const model = ref()
 const addoptions = ref([])
-const Seloptions = ref({
-    time: time.value,
-    make: make.value,
-    model: model.value,
+const selOptions = ref({
+    time:'',
+    make:'',
+    model:'',
 })
 const makeSelect = ref([])
 const modelSelect = ref([])
@@ -26,7 +23,8 @@ const addVisible = ref(false);
 
 //筛选照片
 const filterPhoto = () => {
-    filterPhotoAPI(addoptions.value)
+    console.log(selOptions.time)
+    filterPhotoAPI(selOptions)
 }
 
 
@@ -113,19 +111,19 @@ onMounted(() => {
     <div class="hidden lg:block">
         <div class="flex flex-row justify-center bg-gradient-to-r from-transblue to-transpink">
             <div class="m-1">
-                <el-select v-model="time" multiple filterable allow-create default-first-option :reserve-keyword="false"
+                <el-select v-model="selOptions.time" multiple filterable allow-create default-first-option :reserve-keyword="false"
                     placeholder="时间" style="width: 240px">
                     <el-option v-for="item in timeSelect" :key="item" :label="item" :value="item" />
                 </el-select>
             </div>
             <div class="m-1">
-                <el-select v-model="make" multiple filterable allow-create default-first-option :reserve-keyword="false"
+                <el-select v-model="selOptions.make" multiple filterable allow-create default-first-option :reserve-keyword="false"
                     placeholder="拍摄设备" style="width: 240px">
                     <el-option v-for="item in makeSelect" :key="item" :label="item" :value="item" />
                 </el-select>
             </div>
             <div class="m-1">
-                <el-select v-model="model" multiple filterable allow-create default-first-option
+                <el-select v-model="selOptions.model" multiple filterable allow-create default-first-option
                     :reserve-keyword="false" placeholder="型号" style="width: 240px">
                     <el-option v-for="item in modelSelect" :key="item" :label="item" :value="item" />
                 </el-select>
